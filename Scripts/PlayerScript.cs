@@ -27,12 +27,17 @@ public class PlayerScript : MonoBehaviour
         canJump = true;
     }
 
+    void FixedUpdate()
+    {
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+    }
+
     // Update is called once per frame
     void Update()
     {
         //horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+
         //Movement for 2D
         if (using2d)
         {
