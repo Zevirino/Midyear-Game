@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 2627777558980100347}
   - component: {fileID: 2679074364686814078}
   - component: {fileID: 2679074364686814079}
+  - component: {fileID: 2679074364686814080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -596,6 +597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+  canJump: 0
+  jumpHeight: 0
 --- !u!50 &2679074364686814079
 Rigidbody2D:
   serializedVersion: 4
@@ -604,7 +607,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2677278975634047699}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -617,6 +620,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
+--- !u!70 &2679074364686814080
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677278975634047699}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0050858855, y: 0.18309087}
+  m_Size: {x: 0.61188877, y: 1.2848076}
+  m_Direction: 0
 --- !u!4 &2680368502187545519
 Transform:
   m_ObjectHideFlags: 0
