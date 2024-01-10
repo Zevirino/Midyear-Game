@@ -11,15 +11,19 @@ public class PlayerScript : MonoBehaviour
     public bool canJump;
     public float jumpHeight = 10.0f;
 
+    //Components
     private Rigidbody2D rb;
+    private Animator an;
+
     private bool using2d;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        using2d = true;
+        an = GetComponent<Animator>();
 
+        using2d = true;
         canJump = true;
     }
 
