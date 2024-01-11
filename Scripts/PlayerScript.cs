@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
 
     //Components
     private Rigidbody2D rb;
-    private Animator an;
+    private Animator anim;
 
     private bool using2d;
 
@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        an = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
 
         using2d = true;
         canJump = true;
@@ -37,6 +37,13 @@ public class PlayerScript : MonoBehaviour
     {
         //horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
+        /*if (horizontalInput != 0)
+        {
+            if (!anim.isPlaying)
+            {
+                anim.Play("Run");
+            }
+        }*/
 
         //Movement for 2D
         if (using2d)
