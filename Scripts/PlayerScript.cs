@@ -37,13 +37,19 @@ public class PlayerScript : MonoBehaviour
     {
         //horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
-        /*if (horizontalInput != 0)
+        //Animations
+        if (!canJump)
         {
-            if (!anim.isPlaying)
-            {
-                anim.Play("Run");
-            }
-        }*/
+            anim.Play("Jump");
+        }
+        else if (horizontalInput != 0)
+        {
+            anim.Play("Run");
+        }
+        else
+        {
+            anim.Play("Idle");
+        }
 
         //Movement for 2D
         if (using2d)
@@ -51,7 +57,8 @@ public class PlayerScript : MonoBehaviour
             //jump
             if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
             {
-                rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                rb.gravityScale = 1;
+                rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);
                 canJump = false;
             }
         }
@@ -65,9 +72,10 @@ public class PlayerScript : MonoBehaviour
 
     public void onCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("2dGround"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = true;
+            rb.gravityScale=0;
         }
     }
 }
