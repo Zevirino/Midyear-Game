@@ -84,14 +84,20 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void onCollisionEnter(Collision collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             canJump = true;
             rb.gravityScale=0;
-        } else if (collision.gameObject.CompareTag("Laser"))
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Laser"))
         {
+            Debug.Log("hi");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
