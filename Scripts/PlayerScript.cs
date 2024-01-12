@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     private float horizontalInput;
     public float speed;
     private float verticalInput;
+    public float gravityWeight = 1.0f;
     public bool canJump;
     public float jumpHeight = 10.0f;
 
@@ -30,6 +31,10 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        if (!using2d)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, verticalInput * speed);
+        }
     }
 
     // Update is called once per frame
@@ -37,6 +42,7 @@ public class PlayerScript : MonoBehaviour
     {
         //horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
+
         //Animations
         if (!canJump)
         {
@@ -51,9 +57,16 @@ public class PlayerScript : MonoBehaviour
             anim.Play("Idle");
         }
 
+        //check for switch between 2D and 2.5D
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            using2d = using2d==true?false:true;
+        }
+
         //Movement for 2D
         if (using2d)
         {
+            rb.gravityScale = gravityWeight;
             //jump
             if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -66,7 +79,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             verticalInput = Input.GetAxis("Vertical");
-            rb.velocity = new Vector2(rb.velocity.x, verticalInput*speed);
+            rb.gravityScale = 0;
         }
     }
 
@@ -77,5 +90,10 @@ public class PlayerScript : MonoBehaviour
             canJump = true;
             rb.gravityScale=0;
         }
+    }
+
+    public float getHorizontalInput()
+    {
+        return horizontalInput;
     }
 }
