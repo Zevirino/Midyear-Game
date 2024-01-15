@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     //Components
     private Rigidbody2D rb;
     private Animator anim;
+    public GameObject shadow;
 
     //Other Variables
     private bool using2d;
@@ -74,6 +75,10 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 using2d = using2d==true?false:true;
+                if (!using2d)
+                {
+                    anim.Play("Idle");
+                }
             }
 
             //Movement for 2D
@@ -87,12 +92,14 @@ public class PlayerScript : MonoBehaviour
                     rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);
                     canJump = false;
                 }
+                shadow.SetActive(false);
             }
             //Movement for 2.5D
             else
             {
                 verticalInput = Input.GetAxis("Vertical");
                 rb.gravityScale = 0;
+                shadow.SetActive(true);
             }
         }
         else
