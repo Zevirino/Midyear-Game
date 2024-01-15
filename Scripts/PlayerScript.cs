@@ -17,7 +17,9 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    //Other Variables
     private bool using2d;
+    public float minY = -10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,56 +33,71 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-        if (!using2d)
+        if (!GameManager.gameFreeze)
         {
-            rb.velocity = new Vector2(rb.velocity.x, verticalInput * speed);
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+            if (!using2d)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, verticalInput * speed);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //horizontal movement
-        horizontalInput = Input.GetAxis("Horizontal");
+        if (!GameManager.gameFreeze)
+        {
+            //Check for death
+            if (transform.position.y < minY)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            //horizontal movement
+            horizontalInput = Input.GetAxis("Horizontal");
 
-        //Animations
-        if (!canJump)
-        {
-            anim.Play("Jump");
-        }
-        else if (horizontalInput != 0)
-        {
-            anim.Play("Run");
+            //Animations
+            if (!canJump)
+            {
+                anim.Play("Jump");
+            }
+            else if (horizontalInput != 0)
+            {
+                anim.Play("Run");
+            }
+            else
+            {
+                anim.Play("Idle");
+            }
+
+            //check for switch between 2D and 2.5D
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                using2d = using2d==true?false:true;
+            }
+
+            //Movement for 2D
+            if (using2d)
+            {
+                rb.gravityScale = gravityWeight;
+                //jump
+                if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    rb.gravityScale = 1;
+                    rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);
+                    canJump = false;
+                }
+            }
+            //Movement for 2.5D
+            else
+            {
+                verticalInput = Input.GetAxis("Vertical");
+                rb.gravityScale = 0;
+            }
         }
         else
         {
             anim.Play("Idle");
-        }
-
-        //check for switch between 2D and 2.5D
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            using2d = using2d==true?false:true;
-        }
-
-        //Movement for 2D
-        if (using2d)
-        {
-            rb.gravityScale = gravityWeight;
-            //jump
-            if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                rb.gravityScale = 1;
-                rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);
-                canJump = false;
-            }
-        }
-        //Movement for 2.5D
-        else
-        {
-            verticalInput = Input.GetAxis("Vertical");
-            rb.gravityScale = 0;
         }
     }
 
