@@ -20,7 +20,7 @@ public class ButtonClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (instance)
             {
