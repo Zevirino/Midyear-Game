@@ -24,6 +24,6 @@ public class BackToMenu : MonoBehaviour
         {
             ButtonClick.playSceneID = sceneId;
         }
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }
