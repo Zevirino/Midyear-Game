@@ -22,11 +22,16 @@ public class PlayerScript : MonoBehaviour
     private bool using2d;
     public float minY = -10.0f;
 
+    //Other objects
+    public GameObject weapon;
+    private WeaponScript weaponScript;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        weaponScript = weapon.GetComponent<WeaponScript>();
 
         using2d = true;
         canJump = true;
@@ -81,7 +86,7 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
-            //Movement for 2D
+            //Things for 2D
             if (using2d)
             {
                 rb.gravityScale = gravityWeight;
@@ -93,6 +98,9 @@ public class PlayerScript : MonoBehaviour
                     canJump = false;
                 }
                 shadow.SetActive(false);
+                //attack
+                weaponScript.attack();
+                
             }
             //Movement for 2.5D
             else
