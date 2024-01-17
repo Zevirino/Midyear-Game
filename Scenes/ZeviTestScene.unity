@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 811175013}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword3
       objectReference: {fileID: 0}
+    - target: {fileID: 1855533300296637610, guid: d152237908d03674da951bcef4e4256a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -407,7 +411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 998502898}
-  speed: -5
   range: 180
 --- !u!1 &1022984494 stripped
 GameObject:
@@ -591,6 +594,10 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 998502898}
+    - target: {fileID: 4112224291914985829, guid: 214926f0647ad31489976e62a30e4326, type: 3}
+      propertyPath: jumpHeight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4112224291914985830, guid: 214926f0647ad31489976e62a30e4326, type: 3}
       propertyPath: m_RootOrder
       value: 1
