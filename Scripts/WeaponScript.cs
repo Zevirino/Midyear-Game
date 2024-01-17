@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour
 {
     public GameObject weapon;
-    public float speed = -5f;
+    public static float speed = -5f;
     public float range = 180f;
     private Quaternion startingRotation;
     // Start is called before the first frame update
@@ -31,9 +31,11 @@ public class WeaponScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
         transform.Rotate(0f, 0f, speed);
-        if (weapon.transform.eulerAngles.z <= startingRotation.eulerAngles.z - range){
+        Debug.Log(weapon.transform.eulerAngles.z);
+        Debug.Log(startingRotation.eulerAngles.z);
+        if (weapon.transform.eulerAngles.z >= startingRotation.eulerAngles.z + range){
+            weapon.SetActive(false);
             yield break;
         }
-        
     }
 }

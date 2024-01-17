@@ -7,6 +7,7 @@ public class PlayerFlip : MonoBehaviour
     public GameObject player;
     private float horizontalInput;
     private SpriteRenderer sr;
+    public bool isWeapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +20,9 @@ public class PlayerFlip : MonoBehaviour
         horizontalInput = player.GetComponent<PlayerScript>().getHorizontalInput();
         //Flips the player depending on the direction they are moving
         sr.flipX = horizontalInput>0?true:horizontalInput<0?false:sr.flipX;
+        if (isWeapon)
+        {
+            WeaponScript.speed *= -1;
+        }
     }
 }

@@ -98,8 +98,11 @@ public class PlayerScript : MonoBehaviour
                     canJump = false;
                 }
                 shadow.SetActive(false);
-                //attack
-                weaponScript.attack();
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    //attack
+                    weaponScript.attack();
+                }
                 
             }
             //Movement for 2.5D
