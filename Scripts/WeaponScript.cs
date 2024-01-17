@@ -6,6 +6,7 @@ public class WeaponScript : MonoBehaviour
 {
     public GameObject weapon;
     public float speed = -5f;
+    public float range = 180f;
     private Quaternion startingRotation;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,9 @@ public class WeaponScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
         transform.Rotate(0f, 0f, speed);
-        if (weapon.transform.rotation.eulerAngles==)
+        if (weapon.transform.eulerAngles.z <= startingRotation.eulerAngles.z - range){
+            yield break;
+        }
         
     }
 }

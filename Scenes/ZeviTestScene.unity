@@ -337,7 +337,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2677278975634047704}
     m_Modifications:
     - target: {fileID: 1855533300296637610, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_Name
@@ -345,15 +345,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.79
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -365,11 +365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1855533300296637611, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_LocalRotation.z
@@ -407,6 +407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 998502898}
+  speed: -5
+  range: 180
 --- !u!1 &1022984494 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7638685205044698696, guid: a46a18b781608d341abdad538895d99e, type: 3}
@@ -588,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 4112224291914985829, guid: 214926f0647ad31489976e62a30e4326, type: 3}
       propertyPath: weapon
       value: 
-      objectReference: {fileID: 7174541002280306218, guid: a837b4be00dc4e849910ed77e91dd855, type: 3}
+      objectReference: {fileID: 998502898}
     - target: {fileID: 4112224291914985830, guid: 214926f0647ad31489976e62a30e4326, type: 3}
       propertyPath: m_RootOrder
       value: 1
