@@ -23,6 +23,7 @@ public class PlayerFlip : MonoBehaviour
         if (isWeapon)
         {
             WeaponScript.speed *= -1;
+            WeaponScript.isFlipped = WeaponScript.isFlipped==true?false:true;
         }
     }
 }
