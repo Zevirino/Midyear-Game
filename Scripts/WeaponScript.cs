@@ -6,8 +6,10 @@ public class WeaponScript : MonoBehaviour
 {
     public GameObject weapon;
     public static float speed = -5f;
+    public static bool isFlipped = false;
     public float range = 180f;
     private Quaternion startingRotation;
+    private bool attackBool = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,25 +19,66 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        while (attackBool)
+        {
+            StartCoroutine(attackAnimation());
+        }
     }
 
     public void attack()
     {
         weapon.transform.rotation = startingRotation;
         weapon.SetActive(true);
-        StartCoroutine(attackAnimation());
+        attackBool = true;
     }
 
     private IEnumerator attackAnimation()
     {
-        yield return new WaitForSeconds(0.01f);
-        transform.Rotate(0f, 0f, speed);
-        Debug.Log(weapon.transform.eulerAngles.z);
-        Debug.Log(startingRotation.eulerAngles.z);
-        if (weapon.transform.eulerAngles.z >= startingRotation.eulerAngles.z + range){
-            weapon.SetActive(false);
-            yield break;
+        if (!isFlipped)
+        {
+            if (weapon.transform.eulerAngles.z < startingRotation.eulerAngles.z + range)
+            {
+                yield return new WaitForSeconds(1);
+                transform.Rotate(0f, 0f, speed);
+                Debug.Log(weapon.transform.eulerAngles.z);
+                Debug.Log(startingRotation.eulerAngles.z);
+            }
+            else
+            {
+                weapon.SetActive(false);
+                attackBool = false;
+            }
+        }
+        else
+        {
+            if (weapon.transform.eulerAngles.z > startingRotation.eulerAngles.z - range)
+            {
+                yield return new WaitForSeconds(1);
+                transform.Rotate(0f, 0f, speed);
+                Debug.Log(weapon.transform.eulerAngles.z);
+                Debug.Log(startingRotation.eulerAngles.z);
+            }
+            else
+            {
+                weapon.SetActive(false);
+                attackBool = false;
+            }
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (attackBool && !collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (attackBool && !col.gameObject.CompareTag("Player"))
+        {
+            Destroy(col.gameObject);
         }
     }
 }
