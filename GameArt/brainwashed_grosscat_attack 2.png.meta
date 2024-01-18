@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7d810cfee4c449d989f629a3b679a98
+guid: 4746dc02b22124c9cb2572bcdc542b25
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,127 +123,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gross monster spsht_0
+      name: brainwashed_grosscat_attack 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 147
+        width: 275
+        height: 219
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b27dfc03a29b54bbd86345978abc2a87
-      internalID: -1504437260
+      spriteID: d55e1c0c5e29840c99762d9b11bcc9a0
+      internalID: -438068064
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gross monster spsht_1
+      name: brainwashed_grosscat_attack 2_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 275
         y: 0
-        width: 60
-        height: 147
+        width: 275
+        height: 219
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fb5b1e2f43814c56b49fafecc929c01
-      internalID: -586805495
+      spriteID: 89a5127c079f149919721153fe165ba1
+      internalID: -1600756214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gross monster spsht_2
+      name: brainwashed_grosscat_attack 2_2
       rect:
         serializedVersion: 2
-        x: 120
+        x: 550
         y: 0
-        width: 60
-        height: 147
+        width: 275
+        height: 219
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 146391c78ce5c40cfa01d8dc15573c9a
-      internalID: -1609046841
+      spriteID: 7f7329f46d7ec453fa058aac8e63d8f0
+      internalID: -1916496906
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gross monster spsht_3
+      name: brainwashed_grosscat_attack 2_3
       rect:
         serializedVersion: 2
-        x: 180
+        x: 825
         y: 0
-        width: 60
-        height: 147
+        width: 275
+        height: 219
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d71059973ad7440e95b2d931f2b286d
-      internalID: -1010035589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gross monster spsht_4
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 0
-        width: 60
-        height: 147
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 10e29670555b44abc8b02541bb8faf63
-      internalID: -1836391841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gross monster spsht_5
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 0
-        width: 60
-        height: 147
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ab11a1645a7147ac88585cdaa787954
-      internalID: 534737634
+      spriteID: b0b0129cc495d42888311d933a018578
+      internalID: -296571008
       vertices: []
       indices: 
       edges: []
@@ -259,12 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      gross monster spsht_0: -1504437260
-      gross monster spsht_1: -586805495
-      gross monster spsht_2: -1609046841
-      gross monster spsht_3: -1010035589
-      gross monster spsht_4: -1836391841
-      gross monster spsht_5: 534737634
+      brainwashed_grosscat_attack 2_0: -438068064
+      brainwashed_grosscat_attack 2_1: -1600756214
+      brainwashed_grosscat_attack 2_2: -1916496906
+      brainwashed_grosscat_attack 2_3: -296571008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
