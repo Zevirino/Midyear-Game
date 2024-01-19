@@ -121,7 +121,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y)
         {
             canJump = true;
             rb.gravityScale=0;
