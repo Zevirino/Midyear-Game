@@ -22,7 +22,7 @@ public class LaserBlock : MonoBehaviour
         if (collider.gameObject.CompareTag("Box")) {
             float y = origPos.y;
             float scale = GetComponent<BoxCollider2D>().size.x;
-            float topEdge = collider.transform.position.y - collider.GetComponent<BoxCollider2D>().size.y;
+            float topEdge = collider.transform.position.y - collider.GetComponent<BoxCollider2D>().size.y/2 + 0.7f;
             transform.position = new Vector2(transform.position.x, y - (y + scale - topEdge));
         }
     }
