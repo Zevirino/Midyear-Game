@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     //Other Variables
     private bool using2d;
     public float minY = -10.0f;
+    private bool deathByBranch = false;
 
     //Other objects
     public GameObject weapon;
@@ -52,7 +53,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameFreeze)
+        if (!GameManager.gameFreeze && !deathByBranch)
         {
             //Check for death
             if (transform.position.y < minY)
@@ -113,7 +114,7 @@ public class PlayerScript : MonoBehaviour
                 shadow.SetActive(true);
             }
         }
-        else
+        else if (!deathByBranch)
         {
             anim.Play("Idle");
         }
@@ -134,6 +135,13 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("hi");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (col.gameObject.CompareTag("Branch"))
+        {
+            transform.position = new Vector2(col.gameObject.transform.position.x, transform.position.y);
+            rb.velocity = new Vector2(0, 0);
+            deathByBranch = true;
+            GetComponent<BranchDeath>().enabled = true;
         }
     }
 

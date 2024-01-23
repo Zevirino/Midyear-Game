@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 0
+  eyeOffset: 0
 --- !u!1 &1151256224857759484
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 0
+  eyeOffset: 0
 --- !u!1 &1151525260083575374
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +452,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 0
+  eyeOffset: 0
 --- !u!1 &1151740419404437232
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 0
+  eyeOffset: 0
 --- !u!1 &1151853151769154712
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 1
+  eyeOffset: 0.15
 --- !u!1 &3088502959637980102
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +841,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374}
   isWeapon: 0
+  isEye: 1
+  eyeOffset: 0.15
 --- !u!1 &3088502959678386760
 GameObject:
   m_ObjectHideFlags: 0
