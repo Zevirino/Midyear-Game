@@ -8,6 +8,9 @@ public class PlayerFlip : MonoBehaviour
     private float horizontalInput;
     private SpriteRenderer sr;
     public bool isWeapon;
+    public bool isEye;
+    private float previousInput = 0f;
+    public float eyeOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,24 @@ public class PlayerFlip : MonoBehaviour
         {
             WeaponScript.speed *= -1;
             WeaponScript.isFlipped = WeaponScript.isFlipped==true?false:true;
+        }
+        if (!(previousInput<0 && horizontalInput<0 || previousInput>0 && horizontalInput>0 || horizontalInput == 0 || previousInput==0 && horizontalInput<0))
+        {
+            if (isEye)
+            {
+                if (sr.flipX)
+                {
+                    transform.position = new Vector2(transform.position.x + eyeOffset, transform.position.y);
+                }
+                else
+                {
+                    transform.position = new Vector2(transform.position.x - eyeOffset, transform.position.y);
+                }
+            }
+        }
+        if (horizontalInput != 0)
+        {
+            previousInput = horizontalInput;
         }
     }
 }

@@ -37,7 +37,7 @@ public class GroundScript : MonoBehaviour
 
     public void onTriggerExit2D(Collider2D col)
     {
-        Debug.Log("THIs is mesage");
+        Debug.Log("This is mesage");
         if (col.gameObject.CompareTag("Player"))
         {
             boxCollider.isTrigger = false;

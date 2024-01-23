@@ -68,17 +68,10 @@ public class WeaponScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (attackBool && !collision.gameObject.CompareTag("Player"))
+        if (attackBool && collision.gameObject.CompareTag("Branch"))
         {
-            Destroy(collision.gameObject);
+            BreakBranch.isBreaking=true;
         }
-    }
-
-    public void OnTriggerEnter2D(Collider2D col)
-    {
-        if (attackBool && !col.gameObject.CompareTag("Player"))
-        {
-            Destroy(col.gameObject);
-        }
+        
     }
 }
