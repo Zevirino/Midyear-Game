@@ -6,8 +6,10 @@ public class Gross_movement : MonoBehaviour
 {
     // Start is called before the first frame update
 
-public Transform target; // 다른 캐릭터의 Transform을 저장할 변수
-    public float speed = 5f; // 이동 속도
+    public Transform target; // 다른 캐릭터의 Transform을 저장할 변수
+    public float speed = 2f; // 이동 속도
+    public float distance;
+    public float range;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +20,24 @@ public Transform target; // 다른 캐릭터의 Transform을 저장할 변수
     // Update is called once per frame
     void Update()
     {
-float newX = Mathf.MoveTowards(transform.position.x, target.position.x, speed * Time.deltaTime);
+            distance = Vector2.Distance(transform.position, target.transform.position);
+            Vector2 direction = target.transform.position - transform.position; 
+            if(Vector2.Distance(transform.position, target.position) <= range){
+                //attack
+            }
+            else{
+                transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed*Time.deltaTime);
+            }
             
-            // y좌표에 대해 움직임
-            float newY = Mathf.MoveTowards(transform.position.y, target.position.y, speed * Time.deltaTime);
+            // float newX = Mathf.MoveTowards(transform.position.x, target.position.x, speed * Time.deltaTime);
+            
+            // // y좌표에 대해 움직임
+            // float newY = Mathf.MoveTowards(transform.position.y, target.position.y, speed * Time.deltaTime);
 
-            // z좌표에 대해 움직임
-            float newZ = Mathf.MoveTowards(transform.position.z, target.position.z, speed * Time.deltaTime);
+            // // z좌표에 대해 움직임
+            // float newZ = Mathf.MoveTowards(transform.position.z, target.position.z, speed * Time.deltaTime);
 
-            // 각각의 좌표를 업데이트
-            transform.position = new Vector3(newX, newY, newZ);
+            // // 각각의 좌표를 업데이트
+            // transform.position = new Vector3(newX, newY, newZ);
     }
 }
