@@ -124,6 +124,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y)
         {
+            Debug.Log("Touching ground!");
             canJump = true;
             rb.gravityScale=0;
         }
