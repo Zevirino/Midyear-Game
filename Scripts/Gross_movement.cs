@@ -11,17 +11,23 @@ public class Gross_movement : MonoBehaviour
     public float distance;
     public float range;
 
+public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = new Vector3 (3, 0, 0);
     }
+
 
     // Update is called once per frame
     void Update()
     {
+
             distance = Vector2.Distance(transform.position, target.transform.position);
             Vector2 direction = target.transform.position - transform.position; 
+            Debug.Log("Target Position: " + target.position);
+        Debug.Log("Current Position: " + transform.position);
             if(Vector2.Distance(transform.position, target.position) <= range){
                 //attack
             }
