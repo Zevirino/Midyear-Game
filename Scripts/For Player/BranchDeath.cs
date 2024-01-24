@@ -9,23 +9,27 @@ public class BranchDeath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.enabled = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(deathAnimation());
+        
     }
 
-    public IEnumerator deathAnimation()
+    public IEnumerator deathAnimation(Vector2 branchPosition)
     {
-        yield return new WaitForSeconds(0.1f);
-        transform.Rotate(0f, 0f, -5f);
-        transform.localScale += new Vector3(-0.01f, -0.01f, -0.01f);
-        if (transform.localScale.y < minPlayerHeight)
+        if (transform.localScale.y >= minPlayerHeight)
+        {
+            yield return new WaitForSeconds(0.01f);
+            transform.Rotate(0f, 0f, -5f);
+            transform.localScale += new Vector3(-0.01f, -0.01f, -0.01f);
+            StartCoroutine(deathAnimation(branchPosition));
+        }
+        else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        }   
     }
 }
