@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     //Other Variables
     private bool using2d;
     public float minY = -10.0f;
-    private bool deathByBranch = false;
+    public bool deathByBranch = false;
 
     //Other objects
     public GameObject weapon;
@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameManager.gameFreeze)
+        if (!GameManager.gameFreeze && !deathByBranch)
         {
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
             if (!using2d)
@@ -99,11 +99,6 @@ public class PlayerScript : MonoBehaviour
                     canJump = false;
                 }
                 shadow.SetActive(false);
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    //attack
-                    weaponScript.attack();
-                }
                 
             }
             //Movement for 2.5D
@@ -124,7 +119,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y)
         {
-            Debug.Log("Touching ground!");
             canJump = true;
             rb.gravityScale=0;
         }
@@ -142,7 +136,7 @@ public class PlayerScript : MonoBehaviour
             transform.position = new Vector2(col.gameObject.transform.position.x, transform.position.y);
             rb.velocity = new Vector2(0, 0);
             deathByBranch = true;
-            GetComponent<BranchDeath>().enabled = true;
+            StartCoroutine((GetComponent<BranchDeath>()).deathAnimation(col.gameObject.transform.position));
         }
     }
 

@@ -19,49 +19,43 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (attackBool)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            StartCoroutine(attackAnimation());
+            Debug.Log("pressing z");
+            weapon.transform.rotation = startingRotation;
+            weapon.SetActive(true);
+            attackBool = true;
+            
         }
-    }
-
-    public void attack()
-    {
-        weapon.transform.rotation = startingRotation;
-        weapon.SetActive(true);
-        attackBool = true;
-    }
-
-    private IEnumerator attackAnimation()
-    {
-        if (!isFlipped)
+        if (attackBool)
         {
-            if (weapon.transform.eulerAngles.z < startingRotation.eulerAngles.z + range)
+            if (!isFlipped)
             {
-                yield return new WaitForSeconds(1);
-                transform.Rotate(0f, 0f, speed);
-                Debug.Log(weapon.transform.eulerAngles.z);
-                Debug.Log(startingRotation.eulerAngles.z);
+                if (weapon.transform.eulerAngles.z < startingRotation.eulerAngles.z + range)
+                {
+                    transform.Rotate(0f, 0f, speed);
+                    Debug.Log(weapon.transform.eulerAngles.z);
+                    Debug.Log(startingRotation.eulerAngles.z);
+                }
+                else
+                {
+                    weapon.SetActive(false);
+                    attackBool = false;
+                }
             }
             else
             {
-                weapon.SetActive(false);
-                attackBool = false;
-            }
-        }
-        else
-        {
-            if (weapon.transform.eulerAngles.z > startingRotation.eulerAngles.z - range)
-            {
-                yield return new WaitForSeconds(1);
-                transform.Rotate(0f, 0f, speed);
-                Debug.Log(weapon.transform.eulerAngles.z);
-                Debug.Log(startingRotation.eulerAngles.z);
-            }
-            else
-            {
-                weapon.SetActive(false);
-                attackBool = false;
+                if (weapon.transform.eulerAngles.z > startingRotation.eulerAngles.z - range)
+                {
+                    transform.Rotate(0f, 0f, speed);
+                    Debug.Log(weapon.transform.eulerAngles.z);
+                    Debug.Log(startingRotation.eulerAngles.z);
+                }
+                else
+                {
+                    weapon.SetActive(false);
+                    attackBool = false;
+                }
             }
         }
     }
