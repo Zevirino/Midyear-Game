@@ -12,6 +12,7 @@ public class BreakBranch : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        bc.isTrigger = false;
     }
 
     // Update is called once per frame
@@ -30,6 +31,7 @@ public class BreakBranch : MonoBehaviour
 
     private void breakEffect()
     {
+        isBreaking = false;
         rb.gravityScale = 1;
         rb.constraints = RigidbodyConstraints2D.None;
         StartCoroutine(dissapear());
@@ -38,7 +40,6 @@ public class BreakBranch : MonoBehaviour
     public IEnumerator dissapear()
     {
         yield return new WaitForSeconds(2.0f);
-        isBreaking = false;
         Destroy(gameObject);
     }
 

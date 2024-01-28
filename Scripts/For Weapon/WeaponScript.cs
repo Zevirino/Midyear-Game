@@ -10,16 +10,22 @@ public class WeaponScript : MonoBehaviour
     public float range = 180f;
     private Quaternion startingRotation;
     private bool attackBool = false;
+    private bool using2D;
     // Start is called before the first frame update
     void Start()
     {
         startingRotation = weapon.transform.rotation;
+        using2D = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            using2D = using2D==true?false:true;
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && using2D && !attackBool)
         {
             Debug.Log("pressing z");
             weapon.transform.rotation = startingRotation;
@@ -33,7 +39,7 @@ public class WeaponScript : MonoBehaviour
             {
                 if (weapon.transform.eulerAngles.z < startingRotation.eulerAngles.z + range)
                 {
-                    transform.Rotate(0f, 0f, speed);
+                    weapon.transform.Rotate(0f, 0f, speed);
                     Debug.Log(weapon.transform.eulerAngles.z);
                     Debug.Log(startingRotation.eulerAngles.z);
                 }
@@ -47,7 +53,7 @@ public class WeaponScript : MonoBehaviour
             {
                 if (weapon.transform.eulerAngles.z > startingRotation.eulerAngles.z - range)
                 {
-                    transform.Rotate(0f, 0f, speed);
+                    weapon.transform.Rotate(0f, 0f, speed);
                     Debug.Log(weapon.transform.eulerAngles.z);
                     Debug.Log(startingRotation.eulerAngles.z);
                 }

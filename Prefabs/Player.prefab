@@ -244,6 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1148816911272965088}
   - component: {fileID: 1056987810245982310}
+  - component: {fileID: 7783694140669898723}
   - component: {fileID: 1148816911272965091}
   - component: {fileID: 1148816911272965090}
   - component: {fileID: 1148816911272964893}
@@ -295,6 +296,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7783694140669898723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151525260083575374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4380b39c5279b498c02fca40da22b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 1855533300296637610, guid: d152237908d03674da951bcef4e4256a, type: 3}
+  range: 180
 --- !u!114 &1148816911272965091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +327,9 @@ MonoBehaviour:
   canJump: 0
   jumpHeight: 5
   shadow: {fileID: 3088502959678386760}
+  using2d: 0
   minY: -10
+  deathByBranch: 0
   weapon: {fileID: 3683025993967375814}
 --- !u!50 &1148816911272965090
 Rigidbody2D:
@@ -934,6 +951,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1148816911272965088}
     m_Modifications:
+    - target: {fileID: -1764569576800920449, guid: d152237908d03674da951bcef4e4256a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1151525260083575374}
     - target: {fileID: 1855533300296637610, guid: d152237908d03674da951bcef4e4256a, type: 3}
       propertyPath: m_Name
       value: sword3

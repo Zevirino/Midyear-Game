@@ -452,7 +452,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 7
 --- !u!114 &720341169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +660,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 7
 --- !u!114 &1420046500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,7 +806,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 7
 --- !u!114 &1895510500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2677278975634047699}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0dc83ff0dbe683a46ba32a0bbbffca01, type: 3}
   m_Name: 
@@ -1094,11 +1094,20 @@ PrefabInstance:
       propertyPath: eyeOffset
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 3088502961264019822, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3683025993967375814, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7783694140669898723, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 3088502961138153630}
+    m_RemovedComponents:
+    - {fileID: 3088502961264019822, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
 --- !u!1 &3088502961138153630 stripped
 GameObject:

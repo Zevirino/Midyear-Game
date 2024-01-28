@@ -22,8 +22,11 @@ public class PlayerFlip : MonoBehaviour
     {
         horizontalInput = player.GetComponent<PlayerScript>().getHorizontalInput();
         //Flips the player depending on the direction they are moving
-        sr.flipX = horizontalInput>0?true:horizontalInput<0?false:sr.flipX;
-        if (isWeapon)
+        if (!isWeapon)
+        {
+            sr.flipX = horizontalInput>0?true:horizontalInput<0?false:sr.flipX;
+        }
+        else
         {
             WeaponScript.speed *= -1;
             WeaponScript.isFlipped = WeaponScript.isFlipped==true?false:true;
@@ -33,6 +36,17 @@ public class PlayerFlip : MonoBehaviour
             if (isEye)
             {
                 if (sr.flipX)
+                {
+                    transform.position = new Vector2(transform.position.x + eyeOffset, transform.position.y);
+                }
+                else
+                {
+                    transform.position = new Vector2(transform.position.x - eyeOffset, transform.position.y);
+                }
+            }
+            else if (isWeapon)
+            {
+                if (WeaponScript.isFlipped)
                 {
                     transform.position = new Vector2(transform.position.x + eyeOffset, transform.position.y);
                 }

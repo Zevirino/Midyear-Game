@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject shadow;
 
     //Other Variables
-    private bool using2d;
+    public bool using2d;
     public float minY = -10.0f;
     public bool deathByBranch = false;
 
