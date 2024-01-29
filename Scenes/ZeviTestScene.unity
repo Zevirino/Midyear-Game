@@ -912,6 +912,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2069350094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3683025994656714638, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+  m_PrefabInstance: {fileID: 3088502961138153629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1185445902424942262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -922,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_RootOrder
@@ -1110,6 +1119,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375814, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
@@ -1138,6 +1151,10 @@ PrefabInstance:
       propertyPath: attackSpeed
       value: 0.001
       objectReference: {fileID: 0}
+    - target: {fileID: 4441680409449699216, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: trailObject
+      value: 
+      objectReference: {fileID: 2069350094}
     - target: {fileID: 5575012435774117139, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
       propertyPath: weapon
       value: 
@@ -1356,6 +1373,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3700847603933278978, guid: a46a18b781608d341abdad538895d99e, type: 3}
+      propertyPath: shakeSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700847603933278978, guid: a46a18b781608d341abdad538895d99e, type: 3}
+      propertyPath: shakeLength
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7638685205044698696, guid: a46a18b781608d341abdad538895d99e, type: 3}
       propertyPath: m_Name
       value: Box
