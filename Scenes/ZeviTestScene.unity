@@ -1098,11 +1098,47 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3683025993967375814, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3683025993967375812, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783694140669898723, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+    - target: {fileID: 3683025993967375812, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375814, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683025993967375815, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441680409449699216, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: range
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441680409449699216, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+      propertyPath: attackSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575012435774117139, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
       propertyPath: weapon
       value: 
       objectReference: {fileID: 3088502961138153630}
@@ -1121,7 +1157,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088502961138153630}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

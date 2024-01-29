@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 1855533300296637611}
   - component: {fileID: 1855533300296637608}
   - component: {fileID: -1764569576800920449}
+  - component: {fileID: -7532105618494202116}
   m_Layer: 0
   m_Name: sword3
   m_TagString: Untagged
@@ -239,6 +240,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1151525260083575374, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+  weapon: {fileID: 0}
   isWeapon: 1
   isEye: 0
+  weaponController: 0
   eyeOffset: 1
+--- !u!114 &-7532105618494202116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855533300296637610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4380b39c5279b498c02fca40da22b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 140
+  attackSpeed: 0.001
