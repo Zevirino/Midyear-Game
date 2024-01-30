@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,15 +29,18 @@ public class PlayerScript : MonoBehaviour
     private WeaponScript weaponScript;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        weaponScript = weapon.GetComponent<WeaponScript>();
+void Start()
+{
+    rb = GetComponent<Rigidbody2D>();
+    anim = GetComponent<Animator>();
+    weaponScript = weapon.GetComponent<WeaponScript>();
 
-        using2d = true;
-        canJump = true;
-    }
+    using2d = true;
+    canJump = true;
+
+    // Set initial position
+    transform.position = new Vector3(-3f, 0f, 0f);
+}
 
     void FixedUpdate()
     {
@@ -114,6 +118,7 @@ public class PlayerScript : MonoBehaviour
             anim.Play("Idle");
         }
     }
+public Text collisionText; // Reference to the Text UI element for collision messages
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -122,7 +127,17 @@ public class PlayerScript : MonoBehaviour
             canJump = true;
             rb.gravityScale=0;
         }
+
+if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Collision handling between the player and an enemy
+
+            Debug.Log("Two characters have collided!");
+            // Additional processing can be added here
+        }
     }
+        
+    
 
     public void OnTriggerEnter2D(Collider2D col)
     {
@@ -144,4 +159,6 @@ public class PlayerScript : MonoBehaviour
     {
         return horizontalInput;
     }
+
+
 }

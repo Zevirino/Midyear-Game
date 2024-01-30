@@ -26,8 +26,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
             distance = Vector2.Distance(transform.position, target.transform.position);
             Vector2 direction = target.transform.position - transform.position; 
-            Debug.Log("Target Position: " + target.position);
-        Debug.Log("Current Position: " + transform.position);
+
             if(Vector2.Distance(transform.position, target.position) <= range){
                 //attack
             }
@@ -46,4 +45,6 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             // // 각각의 좌표를 업데이트
             // transform.position = new Vector3(newX, newY, newZ);
     }
+
+
 }
