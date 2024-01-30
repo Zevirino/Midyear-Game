@@ -12,6 +12,7 @@ public class BreakBranch : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        bc.isTrigger = false;
     }
 
     // Update is called once per frame

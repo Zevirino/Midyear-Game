@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1855533299941328611
 Transform:
   m_ObjectHideFlags: 0
@@ -150,7 +150,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1855533300296637611}
   - component: {fileID: 1855533300296637608}
-  - component: {fileID: 1855533300296637609}
+  - component: {fileID: -1764569576800920449}
+  - component: {fileID: -7532105618494202116}
   m_Layer: 0
   m_Name: sword3
   m_TagString: Untagged
@@ -226,7 +227,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1855533300296637609
+--- !u!114 &-1764569576800920449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,7 +236,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1855533300296637610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b5b78c3b7678efc9edc6c4967a4f57, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e27611943dfd549beb19438961faef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -5
+  player: {fileID: 1151525260083575374, guid: 98ddd7c99fa0da7478a761fbb787e212, type: 3}
+  weapon: {fileID: 1855533300296637610}
+  isWeapon: 1
+  isEye: 0
+  weaponController: 0
+  eyeOffset: 1
+--- !u!114 &-7532105618494202116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855533300296637610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4380b39c5279b498c02fca40da22b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 140
+  attackSpeed: 0.001
