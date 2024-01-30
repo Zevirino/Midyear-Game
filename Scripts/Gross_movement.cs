@@ -1,6 +1,8 @@
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gross_movement : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class Gross_movement : MonoBehaviour
     public float speed = 2f; // 이동 속도
     public float distance;
     public float range;
+    private Animator anim;
+    public int duration = 60;
+    public int timeRemaining;
+    public bool isCountingDown = false;
 
 public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
@@ -17,6 +23,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
     void Start()
     {
         transform.position = new Vector3 (3, 0, 0);
+        anim = GetComponent<Animator>();
     }
 
 
@@ -28,10 +35,16 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             Vector2 direction = target.transform.position - transform.position; 
 
             if(Vector2.Distance(transform.position, target.position) <= range){
-                //attack
+                if (!isCountingDown) {
+                    isCountingDown = true;
+                    timeRemaining = duration;
+                    
+                }
+                _tick();
             }
             else{
                 transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed*Time.deltaTime);
+                anim.Play("Gross_walk");
             }
             
             // float newX = Mathf.MoveTowards(transform.position.x, target.position.x, speed * Time.deltaTime);
@@ -44,6 +57,18 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
             // // 각각의 좌표를 업데이트
             // transform.position = new Vector3(newX, newY, newZ);
+    }
+
+    private void _tick() {
+
+        timeRemaining--;
+        if(timeRemaining > 0) {
+            Invoke ( "_tick", 1f );
+        } else {
+            isCountingDown = false;
+            anim.Play("Gross_attack");
+            print("attacks");
+        }
     }
 
 

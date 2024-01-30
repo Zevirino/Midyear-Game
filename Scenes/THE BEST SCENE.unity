@@ -609,6 +609,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5955524383985341253, guid: 2b8bcf9f6318240f687c174ed787b115, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1710164419}
+    - targetCorrespondingSourceObject: {fileID: 5955524383985341253, guid: 2b8bcf9f6318240f687c174ed787b115, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1710164421}
   m_SourcePrefab: {fileID: 100100000, guid: 2b8bcf9f6318240f687c174ed787b115, type: 3}
 --- !u!1 &1710164415 stripped
 GameObject:
@@ -632,7 +635,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -646,7 +649,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1710164419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +665,10 @@ MonoBehaviour:
   target: {fileID: 738326329}
   speed: 5
   distance: 0
-  range: 0
+  range: 2
+  duration: 60
+  timeRemaining: 50
+  isCountingDown: 0
   initialPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1710164420
 MonoBehaviour:
@@ -677,6 +683,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityWeight: 1
+--- !u!95 &1710164421
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710164415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21124b09c1e8043088601bbaf633232f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &4732282236431911171
 Transform:
   m_ObjectHideFlags: 0
