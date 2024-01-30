@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     private float verticalInput;
     public float gravityWeight = 1.0f;
     public bool canJump;
-    public float jumpHeight = 10.0f;
+    public float jumpHeight = 7.5f;
 
     //Components
     private Rigidbody2D rb;
@@ -22,29 +22,34 @@ public class PlayerScript : MonoBehaviour
     //Other Variables
     public bool using2d;
     public float minY = -10.0f;
-    public bool deathByBranch = false;
+    private bool deathByBranch;
+    private bool doorEntry;
 
     //Other objects
     public GameObject weapon;
     private WeaponScript weaponScript;
 
     // Start is called before the first frame update
-void Start()
-{
-    rb = GetComponent<Rigidbody2D>();
-    anim = GetComponent<Animator>();
-    weaponScript = weapon.GetComponent<WeaponScript>();
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        weaponScript = weapon.GetComponent<WeaponScript>();
 
-    using2d = true;
-    canJump = true;
+        using2d = true;
+        canJump = true;
+        doorEntry = false;
+        deathByBranch = false;
 
-    // Set initial position
-    transform.position = new Vector3(-3f, 0f, 0f);
-}
+        // Set initial position
+        transform.position = new Vector3(-3f, 0f, 0f);
+
+        Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
+    }
 
     void FixedUpdate()
     {
-        if (!GameManager.gameFreeze && !deathByBranch)
+        if (!GameManager.gameFreeze && !deathByBranch && !doorEntry)
         {
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
             if (!using2d)
@@ -57,7 +62,7 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameFreeze && !deathByBranch)
+        if (!GameManager.gameFreeze && !deathByBranch && !doorEntry)
         {
             //Check for death
             if (transform.position.y < minY)
@@ -72,7 +77,7 @@ void Start()
             {
                 anim.Play("Jump");
             }
-            else if (horizontalInput != 0)
+            else if (horizontalInput != 0 || (verticalInput!=0 && !using2d))
             {
                 anim.Play("Run");
             }
@@ -96,7 +101,7 @@ void Start()
             {
                 rb.gravityScale = gravityWeight;
                 //jump
-                if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
+                if (canJump && Input.GetKeyDown(KeyCode.UpArrow) || canJump && Input.GetKeyDown(KeyCode.W))
                 {
                     rb.gravityScale = 1;
                     rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);
@@ -113,22 +118,25 @@ void Start()
                 shadow.SetActive(true);
             }
         }
-        else if (!deathByBranch)
+        else if (!deathByBranch && !doorEntry)
         {
             anim.Play("Idle");
         }
     }
-public Text collisionText; // Reference to the Text UI element for collision messages
+    public Text collisionText; // Reference to the Text UI element for collision messages
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y)
+        if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y || collision.gameObject.CompareTag("Box") && transform.position.y>collision.gameObject.transform.position.y)
         {
             canJump = true;
             rb.gravityScale=0;
         }
-
-if (collision.gameObject.CompareTag("Enemy"))
+        if ((collision.gameObject.CompareTag("Box") && (transform.position.y - (transform.localScale.y / 2.0f)) > (collision.gameObject.transform.position.y + (collision.gameObject.transform.localScale.y / 2.0f)))) {
+            canJump = true;
+            rb.gravityScale = 0;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             // Collision handling between the player and an enemy
 
@@ -153,12 +161,16 @@ if (collision.gameObject.CompareTag("Enemy"))
             deathByBranch = true;
             StartCoroutine((GetComponent<BranchDeath>()).deathAnimation(col.gameObject.transform.position));
         }
+        if (col.gameObject.CompareTag("Door"))
+        {
+            doorEntry = true;
+            StartCoroutine((GetComponent<DoorEntry>()).doorAnimation());
+            StartCoroutine((GetComponent<DoorEntry>()).fadeAnimation());
+        }
     }
 
     public float getHorizontalInput()
     {
         return horizontalInput;
     }
-
-
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DimensionGravitySwitch : MonoBehaviour
 {
-    private bool using2d;
+    public bool using2d;
     private Rigidbody2D rb;
     public float gravityWeight = 1.0f;
 
