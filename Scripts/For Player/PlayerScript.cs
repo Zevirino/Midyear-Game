@@ -130,7 +130,10 @@ public class PlayerScript : MonoBehaviour
             canJump = true;
             rb.gravityScale=0;
         }
-
+        if ((collision.gameObject.CompareTag("Box") && (transform.position.y - (transform.localScale.y / 2.0f)) > (collision.gameObject.transform.position.y + (collision.gameObject.transform.localScale.y / 2.0f)))) {
+            canJump = true;
+            rb.gravityScale = 0;
+        }
         if (collision.gameObject.CompareTag("Enemy"))
         {
             // Collision handling between the player and an enemy
