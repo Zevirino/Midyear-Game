@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour
             {
                 anim.Play("Jump");
             }
-            else if (horizontalInput != 0)
+            else if (horizontalInput != 0 || (verticalInput!=0 && !using2d))
             {
                 anim.Play("Run");
             }
