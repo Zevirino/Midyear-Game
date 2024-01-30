@@ -43,6 +43,8 @@ public class PlayerScript : MonoBehaviour
 
         // Set initial position
         transform.position = new Vector3(-3f, 0f, 0f);
+
+        Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
     }
 
     void FixedUpdate()
@@ -125,7 +127,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y)
+        if (collision.gameObject.CompareTag("Ground") && transform.position.y>collision.gameObject.transform.position.y || collision.gameObject.CompareTag("Box") && transform.position.y>collision.gameObject.transform.position.y)
         {
             canJump = true;
             rb.gravityScale=0;
