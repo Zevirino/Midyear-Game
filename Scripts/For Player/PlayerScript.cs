@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     private float verticalInput;
     public float gravityWeight = 1.0f;
     public bool canJump;
-    public float jumpHeight = 10.0f;
+    public float jumpHeight = 7.5f;
 
     //Components
     private Rigidbody2D rb;
@@ -96,7 +96,7 @@ void Start()
             {
                 rb.gravityScale = gravityWeight;
                 //jump
-                if (canJump && Input.GetKeyDown(KeyCode.UpArrow))
+                if (canJump && Input.GetKeyDown(KeyCode.UpArrow) || canJump && Input.GetKeyDown(KeyCode.W))
                 {
                     rb.gravityScale = 1;
                     rb.AddForce(new Vector2(rb.velocity.x, jumpHeight),ForceMode2D.Impulse);

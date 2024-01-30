@@ -6,7 +6,6 @@ public class WeaponScript : MonoBehaviour
 {
     private SpriteRenderer sr;
     private PolygonCollider2D polyCol;
-    public GameObject trailObject;
 
     public static float speed = 5f;
     public float range = 180f;
@@ -40,7 +39,6 @@ public class WeaponScript : MonoBehaviour
             //disable collider and sprite renderer
             sr.enabled = true;
             polyCol.enabled = true;
-            trailObject.SetActive(true);
 
             attackBool = true;
             StartCoroutine(attackAnimation());
@@ -71,7 +69,6 @@ public class WeaponScript : MonoBehaviour
         }
         sr.enabled = false;
         polyCol.enabled = false;
-        trailObject.SetActive(false);
         attackBool = false;
     }
 
