@@ -22,29 +22,32 @@ public class PlayerScript : MonoBehaviour
     //Other Variables
     public bool using2d;
     public float minY = -10.0f;
-    public bool deathByBranch = false;
+    private bool deathByBranch;
+    private bool doorEntry;
 
     //Other objects
     public GameObject weapon;
     private WeaponScript weaponScript;
 
     // Start is called before the first frame update
-void Start()
-{
-    rb = GetComponent<Rigidbody2D>();
-    anim = GetComponent<Animator>();
-    weaponScript = weapon.GetComponent<WeaponScript>();
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        weaponScript = weapon.GetComponent<WeaponScript>();
 
-    using2d = true;
-    canJump = true;
+        using2d = true;
+        canJump = true;
+        doorEntry = false;
+        deathByBranch = false;
 
-    // Set initial position
-    transform.position = new Vector3(-3f, 0f, 0f);
-}
+        // Set initial position
+        transform.position = new Vector3(-3f, 0f, 0f);
+    }
 
     void FixedUpdate()
     {
-        if (!GameManager.gameFreeze && !deathByBranch)
+        if (!GameManager.gameFreeze && !deathByBranch && !doorEntry)
         {
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
             if (!using2d)
@@ -57,7 +60,7 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameFreeze && !deathByBranch)
+        if (!GameManager.gameFreeze && !deathByBranch && !doorEntry)
         {
             //Check for death
             if (transform.position.y < minY)
@@ -113,12 +116,12 @@ void Start()
                 shadow.SetActive(true);
             }
         }
-        else if (!deathByBranch)
+        else if (!deathByBranch && !doorEntry)
         {
             anim.Play("Idle");
         }
     }
-public Text collisionText; // Reference to the Text UI element for collision messages
+    public Text collisionText; // Reference to the Text UI element for collision messages
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -128,7 +131,7 @@ public Text collisionText; // Reference to the Text UI element for collision mes
             rb.gravityScale=0;
         }
 
-if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             // Collision handling between the player and an enemy
 
@@ -153,12 +156,16 @@ if (collision.gameObject.CompareTag("Enemy"))
             deathByBranch = true;
             StartCoroutine((GetComponent<BranchDeath>()).deathAnimation(col.gameObject.transform.position));
         }
+        if (col.gameObject.CompareTag("Door"))
+        {
+            doorEntry = true;
+            StartCoroutine((GetComponent<DoorEntry>()).doorAnimation());
+            StartCoroutine((GetComponent<DoorEntry>()).fadeAnimation());
+        }
     }
 
     public float getHorizontalInput()
     {
         return horizontalInput;
     }
-
-
 }
