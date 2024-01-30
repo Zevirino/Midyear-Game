@@ -15,6 +15,9 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3((player.transform.position.x - transform.position.x)*Time.deltaTime, 0,0));
+        if (!GameManager.gameFreeze)
+        {
+            transform.Translate(new Vector3((player.transform.position.x - transform.position.x)*Time.deltaTime, 0,0));
+        }
     }
 }
