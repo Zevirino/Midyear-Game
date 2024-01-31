@@ -40,7 +40,7 @@ public class LaserBlock : MonoBehaviour
             else
             {
                 float rightEdge = transform.position.x + (transform.localScale.y * GetComponent<BoxCollider2D>().size.y) / 2.0f;
-                float leftEdge = collider.transform.position.x + collider.GetComponent<BoxCollider2D>().size.x / 2 - 0.7f;
+                float leftEdge = collider.transform.position.x + (collider.GetComponent<BoxCollider2D>().size.x * collider.transform.localScale.x) / 2 - 0.6f;
                 transform.position = new Vector3((rightEdge + leftEdge) / 2.0f, transform.position.y, transform.position.z);
                 float yScale = Math.Abs(leftEdge - rightEdge) / (GetComponent<BoxCollider2D>().size.y * transform.localScale.y);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * yScale, transform.localScale.z);
