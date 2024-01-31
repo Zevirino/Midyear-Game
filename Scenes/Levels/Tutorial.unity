@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2623621278556195156}
+  canFollowYAxis: 0
 --- !u!1 &63187380
 GameObject:
   m_ObjectHideFlags: 0
