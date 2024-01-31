@@ -54,4 +54,12 @@ public class LaserBlock : MonoBehaviour
             transform.localScale = origScale;
         }
     }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GrossEnemy"))
+        {
+            collision.gameObject.GetComponent<Gross>().takeDamage(2.5f);
+        }
+    }
 }

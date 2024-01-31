@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
     public int minY = 0;
+    public static bool bossFight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameFreeze)
+        if (!GameManager.gameFreeze && !bossFight)
         {
             transform.Translate(new Vector3((player.transform.position.x - transform.position.x)*Time.deltaTime, 0f,0f));
             //Camera only follows player vertically if they are above a certain point
