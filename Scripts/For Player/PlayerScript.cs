@@ -44,11 +44,7 @@ public class PlayerScript : MonoBehaviour
 
         ogPos = transform.position;
         // Set initial position
-<<<<<<< Updated upstream
-        //transform.position = new Vector3(-3f, 0f, 0f);
-=======
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
->>>>>>> Stashed changes
 
         Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
     }
