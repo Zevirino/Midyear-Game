@@ -19,7 +19,7 @@ public class ShakeOnAttack : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter2D(Collision2D col)
+    public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Weapon"))
         {

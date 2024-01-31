@@ -258,8 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4380b39c5279b498c02fca40da22b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 140
-  attackSpeed: 0.001
+  range: 90
+  attackSpeed: 0.002
+  weaponCooldown: 1
 --- !u!60 &368190471393050593
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +271,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

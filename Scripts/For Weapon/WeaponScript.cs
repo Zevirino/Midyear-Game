@@ -7,10 +7,13 @@ public class WeaponScript : MonoBehaviour
     private SpriteRenderer sr;
     private PolygonCollider2D polyCol;
 
-    public static float speed = 5f;
+    public static float speed = 10f;
     public float range = 180f;
     private Quaternion startingRotation;
     public float attackSpeed = 0.01f;
+
+    public float weaponCooldown = 1f;
+    private bool curCooldown = false;
 
     public static bool isFlipped;
     public static bool attackBool = false;
@@ -33,7 +36,7 @@ public class WeaponScript : MonoBehaviour
         {
             using2D = using2D==true?false:true;
         }
-        if (Input.GetKeyDown(KeyCode.Z) && using2D && !attackBool)
+        if (Input.GetKeyDown(KeyCode.Z) && using2D && !attackBool && !curCooldown)
         {
             transform.rotation = startingRotation;
             //disable collider and sprite renderer
@@ -70,14 +73,13 @@ public class WeaponScript : MonoBehaviour
         sr.enabled = false;
         polyCol.enabled = false;
         attackBool = false;
+        StartCoroutine(resetCooldown());
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public IEnumerator resetCooldown()
     {
-        if (attackBool && collision.gameObject.CompareTag("Branch"))
-        {
-            BreakBranch.isBreaking=true;
-        }
-        
+        curCooldown = true;
+        yield return new WaitForSeconds(weaponCooldown);
+        curCooldown = false;
     }
 }

@@ -33,6 +33,7 @@ public class BreakBranch : MonoBehaviour
     {
         rb.gravityScale = 1;
         rb.constraints = RigidbodyConstraints2D.None;
+        rb.AddForce(new Vector3(1f, 0f, 0f));
         StartCoroutine(dissapear());
     }
 
@@ -41,6 +42,14 @@ public class BreakBranch : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         isBreaking = false;
         Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            BreakBranch.isBreaking = true;
+        }
     }
 
 }
