@@ -159,7 +159,7 @@ public class PlayerScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        if (col.gameObject.CompareTag("Branch") && !using2d)
+        if (col.gameObject.CompareTag("Branch") && !using2d && !BreakBranch.isBreaking)
         {
             transform.position = new Vector2(col.gameObject.transform.position.x, transform.position.y);
             rb.velocity = new Vector2(0, 0);
@@ -171,6 +171,10 @@ public class PlayerScript : MonoBehaviour
             doorEntry = true;
             StartCoroutine((GetComponent<DoorEntry>()).doorAnimation());
             StartCoroutine((GetComponent<DoorEntry>()).fadeAnimation());
+        }
+        if (col.gameObject.CompareTag("BossRoomEntrance"))
+        {
+            BossRoomCamera.on = true;
         }
     }
 
