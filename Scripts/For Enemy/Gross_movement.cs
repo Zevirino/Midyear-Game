@@ -43,7 +43,15 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
                 _tick();
             }
             else{
-                transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed*Time.deltaTime);
+                if (PlayerScript.using2d)
+                {
+                transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
+                    transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+                }
+                else 
+                {
+                    transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+                }
                 anim.Play("Gross_walk");
             }
             

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 6;
-    public int health;
+    public int health = 10;
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        
     }
 
     // Update is called once per frame

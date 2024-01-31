@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelSelect : MonoBehaviour
+public class PlayAgain : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,8 @@ public class LevelSelect : MonoBehaviour
         
     }
 
-    public void Load(int sceneID){
-        SceneManager.LoadScene(sceneID);
+    public void playAgain(){
+        ButtonClick.playSceneID = 2;
+        SceneManager.LoadScene(1);
     }
 }

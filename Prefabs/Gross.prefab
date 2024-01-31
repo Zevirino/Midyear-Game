@@ -217,3 +217,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   invulnerableTime: 2
+  invulnerableSquare: {fileID: 3431153895665371099}

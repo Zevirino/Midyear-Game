@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject shadow;
 
     //Other Variables
-    public bool using2d;
+    public static bool using2d;
     public float minY = -10.0f;
     private bool deathByBranch;
     private bool doorEntry;
