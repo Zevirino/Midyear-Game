@@ -10,9 +10,9 @@ public class PlayerScript : MonoBehaviour
     private float horizontalInput;
     public static float speed = 5f;
     private float verticalInput;
-    public float gravityWeight = 1.0f;
+    public static float gravityWeight = 2.0f;
     public bool canJump;
-    public float jumpHeight = 7.5f;
+    public static float jumpHeight = 9f;
 
     //Components
     private Rigidbody2D rb;
@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
         // Set initial position
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
-        Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<CapsuleCollider2D>());
     }
 
     void FixedUpdate()
@@ -145,13 +145,17 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Two characters have collided!");
             // Additional processing can be added here
         }
+        if (collision.gameObject.CompareTag("FireBall"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
         
     
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall"))
+        if (col.gameObject.CompareTag("Laser"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

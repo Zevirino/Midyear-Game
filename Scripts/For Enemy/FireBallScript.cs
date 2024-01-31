@@ -23,4 +23,12 @@ public class FireBallScript : MonoBehaviour
         yield return new WaitForSeconds(6.0f);
         Destroy(gameObject);
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Box"))
+        {
+            StartCoroutine(collision.gameObject.GetComponent<Respawn>().die(1f));
+        }
+    }
 }

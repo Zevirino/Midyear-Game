@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7638685205044698697}
   - component: {fileID: 7638685205044698709}
   - component: {fileID: 5875909555185316533}
+  - component: {fileID: 7698528679989480656}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b0f35e6530a52419a54158745bdd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  using2d: 0
   gravityWeight: 1
 --- !u!114 &5875909555185316533
 MonoBehaviour:
@@ -162,3 +164,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeSpeed: 0.01
   shakeLength: 0.01
+--- !u!114 &7698528679989480656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638685205044698696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba36cdcd636adae4f9e4ece1656d3d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minY: -10

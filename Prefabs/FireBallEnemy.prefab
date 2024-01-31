@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49908f5c7de03064ea29c06f6b21a7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireBallCooldown: 1
+  fireBallCooldown: 1.5
   direction: -1
   fireBall: {fileID: 5061531014341360291, guid: d08a67d31b51fd54c9e2ca391e7797b1, type: 3}
   minY: -10

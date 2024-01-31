@@ -16,10 +16,10 @@ public class ShakeOnAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void OnTriggerEnter2D(Collider2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Weapon"))
         {
