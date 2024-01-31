@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public float minY = -10.0f;
     private bool deathByBranch;
     private bool doorEntry;
+    public Vector2 ogPos;
 
     //Other objects
     public GameObject weapon;
@@ -41,8 +42,9 @@ public class PlayerScript : MonoBehaviour
         doorEntry = false;
         deathByBranch = false;
 
+        ogPos = transform.position;
         // Set initial position
-        transform.position = new Vector3(-3f, 0f, 0f);
+        //transform.position = new Vector3(-3f, 0f, 0f);
 
         Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
     }
@@ -149,9 +151,8 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser"))
+        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall"))
         {
-            Debug.Log("hi");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if (col.gameObject.CompareTag("Branch"))
