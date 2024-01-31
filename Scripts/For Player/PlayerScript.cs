@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
 {
     //movement variables
     private float horizontalInput;
-    public float speed;
+    public static float speed = 5f;
     private float verticalInput;
     public float gravityWeight = 1.0f;
     public bool canJump;
@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
 
         ogPos = transform.position;
         // Set initial position
-        //transform.position = new Vector3(-3f, 0f, 0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         Physics2D.IgnoreCollision(weapon.GetComponent<PolygonCollider2D>(), GetComponent<Collider2D>());
     }

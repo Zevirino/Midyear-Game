@@ -35,7 +35,10 @@ public class ResetLevel : MonoBehaviour
             foreach (GameObject respawnable in posStor.Keys) 
             {
                 respawnable.transform.position = posStor[respawnable];
-                respawnable.GetComponent<DimensionGravitySwitch>().using2d = true;
+                if (!respawnable.CompareTag("Player"))
+                {
+                    respawnable.GetComponent<DimensionGravitySwitch>().using2d = true;
+                }
             }
         }
     }

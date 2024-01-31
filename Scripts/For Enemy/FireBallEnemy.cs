@@ -7,6 +7,7 @@ public class FireBallEnemy : MonoBehaviour
     public float fireBallCooldown;
     public int direction;
     public GameObject fireBall;
+    private bool onScreen;
 
     public float minY = -10;
     private Vector2 ogPos;
@@ -41,11 +42,30 @@ public class FireBallEnemy : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(fireBallCooldown);
-            GameObject go = Instantiate(fireBall, new Vector2(transform.position.x + direction,transform.position.y+0.8f), Quaternion.Euler(0f,0f,rotation));
-            if (direction == -1)
+            if (onScreen)
             {
-                go.GetComponent<FireBallScript>().speed *= -1;
+                GameObject go = Instantiate(fireBall, new Vector2(transform.position.x + direction,transform.position.y+0.8f), Quaternion.Euler(0f,0f,rotation));
+                if (direction == -1)
+                {
+                    go.GetComponent<FireBallScript>().speed *= -1;
+                }
             }
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("MainCamera"))
+        {
+            onScreen = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("MainCamera"))
+        {
+            onScreen = false;
         }
     }
 }
