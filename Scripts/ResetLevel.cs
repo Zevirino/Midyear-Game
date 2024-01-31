@@ -31,7 +31,7 @@ public class ResetLevel : MonoBehaviour
     {
         if (Input.GetKeyDown("r"))
         {
-            player.GetComponent<PlayerScript>().using2d = true;
+            PlayerScript.using2d = true;
             foreach (GameObject respawnable in posStor.Keys) 
             {
                 respawnable.transform.position = posStor[respawnable];
