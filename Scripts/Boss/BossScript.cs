@@ -8,7 +8,9 @@ public class BossScript : MonoBehaviour
     public GameObject dissapearingWall;
     public GameObject fire;
     public GameObject player;
-    public BossRoomCamera cameraScript;
+    public GameObject camera;
+    public GameObject laser;
+    public GameObject laserSpawner;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -16,8 +18,20 @@ public class BossScript : MonoBehaviour
     public float playerThrownBackSpeed = 0.2f;
 
     public float fireBallTimeDelay = 0.2f;
+    public float fireballXOffset;
+    public float fireballYOffset;
 
-    public bool invulnerable;
+    public Vector3 ogFireSize;
+    public Vector2 ogFirePos;
+    public float maxFireSize;
+    public float fireGrowSpeed;
+    public float fireGrowDelay;
+
+    public Vector2 laserPos;
+    public float laserGrowSpeed;
+    public float laserGrowDelay;
+
+    public bool invulnerable = true;
     public float invulnerableTime = 2f;
     public GameObject invulnerableBox;
 
@@ -29,6 +43,7 @@ public class BossScript : MonoBehaviour
     void Start()
     {
         playerOgXPos = player.GetComponent<PlayerScript>().transform.position.x;
+        invulnerable = false;
         StartCoroutine(attackPattern());
     }
 
@@ -40,7 +55,7 @@ public class BossScript : MonoBehaviour
 
     public IEnumerator attackPattern()
     {
-        if (cameraScript.enabled && !invulnerable)
+        if (camera.GetComponent<BossRoomCamera>().enabled && !invulnerable)
         {
             int RandomNum = Random.Range(0, 4);
             switch (RandomNum)
@@ -57,39 +72,66 @@ public class BossScript : MonoBehaviour
                 case 3:
                     StartCoroutine(freezePeriod());
                     break;
-
             }
         }
         else
         {
-            StartCoroutine(attackPattern());
+            //StartCoroutine(attackPattern());
+            StartCoroutine(poisonAttack());
         }
         yield break;
     }
 
     public IEnumerator fireBallAttack()
     {
-        float corY = -10f;
-        while (corY < 10f)
+        float corY = -20f;
+        while (corY < 20f)
         {
-            GameObject go = Instantiate(fireball, new Vector2(transform.position.x + 2, transform.position.y), Quaternion.identity) as GameObject;
+            GameObject go = Instantiate(fireball, new Vector2(transform.position.x + fireballXOffset, transform.position.y + fireballYOffset), Quaternion.identity) as GameObject;
             go.GetComponent<FireBall>().onCreation(corY);
             yield return new WaitForSeconds(fireBallTimeDelay);
-            corY += 0.5f;
+            corY += 2f;
         }
-        yield return new WaitForSeconds(1f);
+        corY = -20f;
+        while (corY < 20f)
+        {
+            GameObject go = Instantiate(fireball, new Vector2(transform.position.x + fireballXOffset, transform.position.y + fireballYOffset), Quaternion.identity) as GameObject;
+            go.GetComponent<FireBall>().onCreation(corY);
+            yield return new WaitForSeconds(fireBallTimeDelay);
+            corY += 2f;
+        }
+        yield return new WaitForSeconds(5f);
         StartCoroutine(attackPattern());
     }
 
     public IEnumerator fireAttack()
     {
-        yield return new WaitForSeconds(1f);
+        fire.transform.localScale = ogFireSize;
+        fire.transform.position = ogFirePos;
+        fire.SetActive(true);
+        while (fire.transform.localScale.x < maxFireSize)
+        {
+            yield return new WaitForSeconds(fireGrowDelay);
+            fire.transform.localScale = new Vector3(fire.transform.localScale.x + fireGrowSpeed, fire.transform.localScale.y + fireGrowSpeed, fire.transform.localScale.z + fireGrowSpeed);
+            fire.transform.position = new Vector2(fire.transform.position.x - 1.5f*fireGrowSpeed, fire.transform.position.y - fireGrowSpeed);
+        }
+        yield return new WaitForSeconds(0.1f);
+        fire.SetActive(false);
+        yield return new WaitForSeconds(5f);
         StartCoroutine(attackPattern());
     }
 
     public IEnumerator poisonAttack()
     {
-        yield return new WaitForSeconds(1f);
+        GameObject go = Instantiate(laser, laserPos, Quaternion.identity) as GameObject;
+        go.transform.localScale = new Vector3(0,0.5f,1);
+        while(go.transform.localScale.x < 7f)
+        {
+            yield return new WaitForSeconds(laserGrowDelay);
+            go.transform.localScale = new Vector3(go.transform.localScale.x + 1, go.transform.localScale.y, go.transform.localScale.z);
+            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed, go.transform.position.y + laserGrowSpeed/2);
+        }
+        yield return new WaitForSeconds(10f);
         StartCoroutine(attackPattern());
     }
 
@@ -116,6 +158,12 @@ public class BossScript : MonoBehaviour
         invulnerable = false;
     }
 
+    public IEnumerator laserFall(GameObject go)
+    {
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(laserSpawner.GetComponent<SpawnLaser>().spawnLaser(go));
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Laser"))
@@ -124,6 +172,7 @@ public class BossScript : MonoBehaviour
             {
                 health -= laserDamageVar;
                 StartCoroutine(invinciblePeriod());
+                StartCoroutine(laserFall(collision.gameObject));
             }
         }
         if (collision.gameObject.CompareTag("Weapon"))

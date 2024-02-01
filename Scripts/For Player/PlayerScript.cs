@@ -145,17 +145,13 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Two characters have collided!");
             // Additional processing can be added here
         }
-        if (collision.gameObject.CompareTag("FireBall"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
         
     
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser"))
+        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser")) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
