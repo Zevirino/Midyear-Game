@@ -21,7 +21,7 @@ public class LaserBlock : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter2D(Collider2D collider) {
+    public void OnTriggerStay2D(Collider2D collider) {
         if (collider.gameObject.CompareTag("Box")) {
             /*
             float y = origPos.y;
@@ -31,10 +31,13 @@ public class LaserBlock : MonoBehaviour
             */
             if (!isHorizontal)
             {
-                float bottomEdge = transform.position.y - (transform.localScale.y * GetComponent<BoxCollider2D>().size.y) / 2.0f;
+                float bottomEdge = origPos.y - ((origScale.y * GetComponent<BoxCollider2D>().size.y) / 2.0f);
+                Debug.Log("Bottom Edge: " + bottomEdge);
                 float topEdge = collider.transform.position.y - collider.GetComponent<BoxCollider2D>().size.y / 2 + 0.7f;
-                transform.position = new Vector3(transform.position.x, (bottomEdge + topEdge) / 2.0f, transform.position.z);
+                Debug.Log("Top Edge: " + topEdge);
+                transform.position = new Vector3(transform.position.x, (bottomEdge + topEdge) / 2.0f - 0.1f, transform.position.z);
                 float yScale = Math.Abs(topEdge - bottomEdge) / (GetComponent<BoxCollider2D>().size.y * transform.localScale.y);
+                Debug.Log("Scale: " + yScale);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * yScale, transform.localScale.z);
             }
             else
