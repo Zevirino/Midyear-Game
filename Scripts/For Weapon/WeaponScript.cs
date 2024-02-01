@@ -7,7 +7,7 @@ public class WeaponScript : MonoBehaviour
     private SpriteRenderer sr;
     private PolygonCollider2D polyCol;
 
-    public static float speed = 10f;
+    public static float speed = 0.5f;
     public float range = 180f;
     private Quaternion startingRotation;
     public float attackSpeed = 0.01f;
@@ -18,6 +18,9 @@ public class WeaponScript : MonoBehaviour
     public static bool isFlipped;
     public static bool attackBool = false;
     private bool using2D;
+
+
+    public GameObject smite_particles;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +82,7 @@ public class WeaponScript : MonoBehaviour
     public IEnumerator resetCooldown()
     {
         curCooldown = true;
+        Instantiate(smite_particles, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(weaponCooldown);
         curCooldown = false;
     }
