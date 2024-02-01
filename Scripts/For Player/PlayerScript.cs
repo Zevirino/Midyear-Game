@@ -18,17 +18,20 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     public GameObject shadow;
+    private PlayerHealth player_health_helper;
 
     //Other Variables
     public static bool using2d;
     public float minY = -10.0f;
     private bool deathByBranch;
+    private bool player_is_dead;
     private bool doorEntry;
     public Vector2 ogPos;
 
     //Other objects
     public GameObject weapon;
     private WeaponScript weaponScript;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +39,14 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         weaponScript = weapon.GetComponent<WeaponScript>();
+        GameObject player_object = GameObject.FindGameObjectWithTag("Player");
+        if (player_object!=null) player_health_helper = player_object.GetComponent<PlayerHealth>();
 
         using2d = true;
         canJump = true;
         doorEntry = false;
         deathByBranch = false;
+        player_is_dead = false;
 
         ogPos = transform.position;
         // Set initial position
@@ -64,8 +70,13 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.gameFreeze && !deathByBranch && !doorEntry)
+        
+        player_is_dead = deathByBranch && player_health_helper.health>0;
+        
+
+        if (!player_is_dead && !GameManager.gameFreeze && !deathByBranch && !doorEntry)
         {
+            // anim.Play("Die");
             //Check for death
             if (transform.position.y < minY)
             {
@@ -75,18 +86,10 @@ public class PlayerScript : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
 
             //Animations
-            if (!canJump)
-            {
-                anim.Play("Jump");
-            }
-            else if (horizontalInput != 0 || (verticalInput!=0 && !using2d))
-            {
-                anim.Play("Run");
-            }
-            else
-            {
-                anim.Play("Idle");
-            }
+            if (!canJump)anim.Play("Jump");
+            else if (horizontalInput != 0 || (verticalInput!=0 && !using2d))anim.Play("Run");
+            else anim.Play("Idle");
+            
 
             //check for switch between 2D and 2.5D
             if (Input.GetKeyDown(KeyCode.Space))
@@ -123,6 +126,10 @@ public class PlayerScript : MonoBehaviour
         else if (!deathByBranch && !doorEntry)
         {
             anim.Play("Idle");
+        }else{
+            //NOTE: PlayerHealth handles removing the player and animating death.
+            anim.Play("Die");
+            print("animating death");
         }
     }
     public Text collisionText; // Reference to the Text UI element for collision messages
