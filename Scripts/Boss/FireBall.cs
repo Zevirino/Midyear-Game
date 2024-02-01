@@ -6,6 +6,8 @@ public class FireBall : MonoBehaviour
 {
     public float rotationVar;
     public float aimPointY;
+    public float minY;
+    public float minX;
 
     private void Start()
     {
@@ -20,6 +22,10 @@ public class FireBall : MonoBehaviour
     void Update()
     {
         transform.Rotate(new Vector3(0f, 0f, rotationVar));
-        transform.Translate(new Vector3(-1f, (aimPointY - transform.position.y)*Time.deltaTime, 0f));
+        transform.Translate(new Vector3(-0.05f, (aimPointY - transform.position.y)*Time.deltaTime/10, 0f),Space.World);
+        if (transform.position.y < minY || transform.position.x<minX)
+        {
+            Destroy(gameObject);
+        }
     }
 }

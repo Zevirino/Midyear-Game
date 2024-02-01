@@ -11,6 +11,9 @@ public class BossScript : MonoBehaviour
     public GameObject camera;
     public GameObject laser;
     public GameObject laserSpawner;
+    public GameObject door;
+
+    public static bool first;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -44,13 +47,22 @@ public class BossScript : MonoBehaviour
     {
         playerOgXPos = player.GetComponent<PlayerScript>().transform.position.x;
         invulnerable = false;
-        StartCoroutine(attackPattern());
+        BossScript.first = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0)
+        {
+            door.SetActive(true);
+            Destroy(gameObject);
+        }
+        if (BossScript.first)
+        {
+            StartCoroutine(fireAttack());
+            BossScript.first = false;
+        }
     }
 
     public IEnumerator attackPattern()
@@ -61,44 +73,48 @@ public class BossScript : MonoBehaviour
             switch (RandomNum)
             {
                 case 0:
+                    Debug.Log("fire ball attack");
                     StartCoroutine(fireBallAttack());
                     break;
                 case 1:
+                    Debug.Log("fire attack");
                     StartCoroutine(fireAttack());
                     break;
                 case 2:
-                    StartCoroutine(poisonAttack());
+                    Debug.Log("poisonAttack");
+                    StartCoroutine(fireAttack());
                     break;
                 case 3:
+                    Debug.Log("freezePeriod");
                     StartCoroutine(freezePeriod());
                     break;
             }
         }
         else
         {
-            //StartCoroutine(attackPattern());
-            StartCoroutine(poisonAttack());
+            yield return new WaitForSeconds(1);
+            StartCoroutine(attackPattern());
         }
         yield break;
     }
 
     public IEnumerator fireBallAttack()
     {
-        float corY = -20f;
-        while (corY < 20f)
+        float corY = -200f;
+        while (corY < 200f)
         {
             GameObject go = Instantiate(fireball, new Vector2(transform.position.x + fireballXOffset, transform.position.y + fireballYOffset), Quaternion.identity) as GameObject;
             go.GetComponent<FireBall>().onCreation(corY);
             yield return new WaitForSeconds(fireBallTimeDelay);
-            corY += 2f;
+            corY += 10f;
         }
-        corY = -20f;
-        while (corY < 20f)
+        corY = -200f;
+        while (corY < 200f)
         {
             GameObject go = Instantiate(fireball, new Vector2(transform.position.x + fireballXOffset, transform.position.y + fireballYOffset), Quaternion.identity) as GameObject;
             go.GetComponent<FireBall>().onCreation(corY);
             yield return new WaitForSeconds(fireBallTimeDelay);
-            corY += 2f;
+            corY += 10f;
         }
         yield return new WaitForSeconds(5f);
         StartCoroutine(attackPattern());
@@ -139,6 +155,7 @@ public class BossScript : MonoBehaviour
     {
         dissapearingWall.SetActive(false);
         yield return new WaitForSeconds(freezeDelay);
+        /*
         GameManager.gameFreeze = true;
         while(player.transform.position.x > playerOgXPos)
         {
@@ -147,6 +164,8 @@ public class BossScript : MonoBehaviour
         }
         GameManager.gameFreeze = false;
         dissapearingWall.SetActive(true);
+        */
+        StartCoroutine(attackPattern());
     }
 
     public IEnumerator invinciblePeriod()

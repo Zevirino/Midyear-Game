@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BossRoomCamera : MonoBehaviour
 {
-    public Vector2 position;
+
+    public GameObject camera;
+    private Camera bossCamera;
+    public Vector3 position;
     public Vector3 scale;
     public float size;
     public static bool on = false;
     // Start is called before the first frame update
     void Start()
     {
-       
+       bossCamera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -19,7 +22,8 @@ public class BossRoomCamera : MonoBehaviour
     {
         if (on)
         {
-            Debug.Log("why hello there");
+            bossCamera.enabled = true;
+            camera.SetActive(false);
             transform.position = position;
             transform.localScale = scale;
             gameObject.GetComponent<Camera>().orthographicSize = size;
