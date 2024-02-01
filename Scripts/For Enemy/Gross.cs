@@ -10,7 +10,6 @@ public class Gross : MonoBehaviour
     private bool invulnerable;
     public GameObject invulnerableSquare;
     private Animator anim;
-    public GameObject BloodEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,6 @@ public class Gross : MonoBehaviour
         // anim.Play("Gross_attack");
         if (health <= 0)
         {
-            Instantiate(BloodEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         if (invulnerable)
