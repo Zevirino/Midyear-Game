@@ -162,7 +162,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser"))
+        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser")) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
