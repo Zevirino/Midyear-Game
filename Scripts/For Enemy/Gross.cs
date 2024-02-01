@@ -24,7 +24,7 @@ public class Gross : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.Play("Gross_attack");
+        // anim.Play("Gross_attack");
         if (health <= 0)
         {
             Destroy(gameObject);

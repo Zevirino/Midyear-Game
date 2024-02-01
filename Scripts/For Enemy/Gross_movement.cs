@@ -17,6 +17,7 @@ public class Gross_movement : MonoBehaviour
     public int timeRemaining;
     public bool isCountingDown = false;
     public bool facingLeft = true;
+    public bool is_attacking = false;
 
 public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
@@ -58,14 +59,11 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             Vector2 direction = target.transform.position - transform.position; 
 
             if(Vector2.Distance(transform.position, target.position) <= range){
-                if (!isCountingDown) {
-                    isCountingDown = true;
-                    timeRemaining = duration;
-                    
-                }
-                _tick();
+                is_attacking = true;
+                anim.Play("enemy_attack");
             }
             else{
+                is_attacking = false;
                 if (PlayerScript.using2d)
                 {
                 transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
@@ -91,17 +89,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             // transform.position = new Vector3(newX, newY, newZ);
     }
 
-    private void _tick() {
 
-        timeRemaining--;
-        if(timeRemaining > 0) {
-            Invoke ( "_tick", 1f );
-        } else {
-            isCountingDown = false;
-            anim.Play("enemy_attack");
-            print("attacks");
-        }
-    }
 
 
 }
