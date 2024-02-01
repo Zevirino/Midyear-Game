@@ -9,7 +9,7 @@ public class Gross_movement : MonoBehaviour
     // Start is called before the first frame update
 
     public Transform target; // 다른 캐릭터의 Transform을 저장할 변수
-    public float speed = 2f; // 이동 속도
+    public float speed = 1f; // 이동 속도
     public float distance;
     public float range;
     private Animator anim;
@@ -35,7 +35,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
         transform.localScale= flippedScale;
     }
 
-    void handleTransformLogic(){
+    void handle_face_L_R_logic(){
         if(target.transform.position.x< transform.position.x){
             if (!facingLeft){
                 facingLeft=true;
@@ -54,16 +54,17 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
     // Update is called once per frame
     void Update()
     {
-        handleTransformLogic();
-            distance = Vector2.Distance(transform.position, target.transform.position);
-            Vector2 direction = target.transform.position - transform.position; 
+        handle_face_L_R_logic();
+        distance = Vector2.Distance(transform.position, target.transform.position);
+        Vector2 direction = target.transform.position - transform.position; 
 
-            if(Vector2.Distance(transform.position, target.position) <= range){
-                is_attacking = true;
-                anim.Play("enemy_attack");
-            }
-            else{
-                is_attacking = false;
+        if(Vector2.Distance(transform.position, target.position) <= range){
+            is_attacking = true;
+            anim.Play("enemy_attack");
+        }
+        else{
+            is_attacking = false;
+            if (target!=null){
                 if (PlayerScript.using2d)
                 {
                 transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
@@ -76,6 +77,8 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
                 }
                 anim.Play("Gross_walk");
             }
+            
+        }
             
             // float newX = Mathf.MoveTowards(transform.position.x, target.position.x, speed * Time.deltaTime);
             
