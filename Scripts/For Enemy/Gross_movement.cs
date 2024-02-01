@@ -16,6 +16,8 @@ public class Gross_movement : MonoBehaviour
     public int duration = 60;
     public int timeRemaining;
     public bool isCountingDown = false;
+    public bool facingLeft = true;
+    public bool is_attacking = false;
 
 public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
@@ -26,23 +28,42 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
         anim = GetComponent<Animator>();
     }
 
+    void flipHorizontally(){
+                    //flip
+        Vector3 flippedScale = transform.localScale;
+        flippedScale.x *= -1;
+        transform.localScale= flippedScale;
+    }
+
+    void handleTransformLogic(){
+        if(target.transform.position.x< transform.position.x){
+            if (!facingLeft){
+                facingLeft=true;
+                flipHorizontally();
+            }
+        }
+        else{
+            if (facingLeft){
+                facingLeft=false;
+                flipHorizontally();
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-
+        handleTransformLogic();
             distance = Vector2.Distance(transform.position, target.transform.position);
             Vector2 direction = target.transform.position - transform.position; 
 
             if(Vector2.Distance(transform.position, target.position) <= range){
-                if (!isCountingDown) {
-                    isCountingDown = true;
-                    timeRemaining = duration;
-                    
-                }
-                _tick();
+                is_attacking = true;
+                anim.Play("enemy_attack");
             }
             else{
+                is_attacking = false;
                 if (PlayerScript.using2d)
                 {
                 transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
@@ -51,6 +72,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
                 else 
                 {
                     transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+                    
                 }
                 anim.Play("Gross_walk");
             }
@@ -67,17 +89,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             // transform.position = new Vector3(newX, newY, newZ);
     }
 
-    private void _tick() {
 
-        timeRemaining--;
-        if(timeRemaining > 0) {
-            Invoke ( "_tick", 1f );
-        } else {
-            isCountingDown = false;
-            anim.Play("Gross_attack");
-            print("attacks");
-        }
-    }
 
 
 }

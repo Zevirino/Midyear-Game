@@ -334,11 +334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 4.02
       objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -394,10 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2006462299}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       insertIndex: -1
@@ -426,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6319e957f6efcb46979a032291d78f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHorizontal: 0
 --- !u!50 &256356994
 Rigidbody2D:
   serializedVersion: 4
@@ -434,7 +432,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256356989}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -453,11 +451,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!4 &256356998 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1185445902279509356, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
-  m_PrefabInstance: {fileID: 256356988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &256356999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,11 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7638685205044698708, guid: a46a18b781608d341abdad538895d99e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.03
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 7638685205044698708, guid: a46a18b781608d341abdad538895d99e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 7638685205044698708, guid: a46a18b781608d341abdad538895d99e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -787,7 +780,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -825,6 +818,7 @@ GameObject:
   - component: {fileID: 2006462299}
   - component: {fileID: 2006462300}
   - component: {fileID: 2006462301}
+  - component: {fileID: 2006462302}
   m_Layer: 0
   m_Name: LaserBottom
   m_TagString: Untagged
@@ -841,11 +835,11 @@ Transform:
   m_GameObject: {fileID: 2006462298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.68, z: 0}
-  m_LocalScale: {x: 50, y: 0.33333334, z: 1}
+  m_LocalPosition: {x: 4.02, y: -3.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 256356998}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2006462300
 SpriteRenderer:
@@ -944,6 +938,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44, y: 0.88}
   m_EdgeRadius: 0
+--- !u!114 &2006462302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006462298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e54e457bc7056469c1d5a071f38ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laser: {fileID: 256356989}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -954,3 +961,4 @@ SceneRoots:
   - {fileID: 114287106}
   - {fileID: 256356988}
   - {fileID: 179888019}
+  - {fileID: 2006462299}

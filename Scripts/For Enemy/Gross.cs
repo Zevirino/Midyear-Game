@@ -9,6 +9,7 @@ public class Gross : MonoBehaviour
     public float invulnerableTime = 2f;
     private bool invulnerable;
     public GameObject invulnerableSquare;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +17,14 @@ public class Gross : MonoBehaviour
         health = 10f;
         invulnerable = false;
         invulnerableSquare.SetActive(false);
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // anim.Play("Gross_attack");
         if (health <= 0)
         {
             Destroy(gameObject);
