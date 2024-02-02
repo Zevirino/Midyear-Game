@@ -12,6 +12,7 @@ public class BossScript : MonoBehaviour
     public GameObject fire;
     public GameObject player;
     public GameObject camera;
+    public GameObject startCamera;
     public GameObject laser;
     public GameObject laserSpawner;
     public GameObject door;
@@ -19,7 +20,6 @@ public class BossScript : MonoBehaviour
     public GameObject slider;
 
     public static bool first;
-    private bool curReset;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -52,39 +52,23 @@ public class BossScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startCamera.SetActive(true);
+        CameraFollow.bossFight = false;
+        BossRoomCamera.on = false;
         health = 100f;
         invulnerable = false;
-        curReset = false;
         BossScript.first = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BossScript.restartFight)
-        {
-            if (!curReset)
-            {
-                player.transform.position = new Vector3(playerOgXPos, -2f, 0f);
-                health = 100f;
-                slider.GetComponent<Slider>().value = health;
-                StopAllCoroutines();
-                StartCoroutine(fireBallAttack());
-                BossScript.restartFight = false;
-                //StartCoroutine(levelReset());
-            }
-        }
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (BossRoomCamera.on)
-            {
-                BossScript.restartFight = true;
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        
         if (health <= 0)
         {
             door.SetActive(true);
@@ -93,7 +77,7 @@ public class BossScript : MonoBehaviour
         }
         if (BossScript.first)
         {
-            StartCoroutine(poisonAttack());
+            StartCoroutine(fireBallAttack());
             BossScript.first = false;
         }
     }
@@ -219,13 +203,6 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         StartCoroutine(laserSpawner.GetComponent<SpawnLaser>().spawnLaser(go));
-    }
-
-    public IEnumerator levelReset()
-    {
-        curReset = true;
-        yield return new WaitForSeconds(0.01f);
-        BossScript.restartFight = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

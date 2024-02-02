@@ -21,5 +21,9 @@ public class LaserMove : MonoBehaviour
             laserBottom.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         }
+        else
+        {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        }
     }
 }

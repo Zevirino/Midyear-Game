@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireBall : MonoBehaviour
 {
     public float rotationVar;
-    public float aimPointY;
+    private float aimPointY;
     public float minY;
     public float minX;
 
