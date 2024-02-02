@@ -6,19 +6,29 @@ using UnityEngine;
 public class LaserBlock : MonoBehaviour
 {
     public bool isHorizontal = false;
-    Vector2 origPos;
-    Vector2 origScale;
+    Vector3 origPos;
+    Vector3 origScale;
+    public GameObject laserBottom;
+    private Vector3 origLaserBottomPos;
+    private Vector3 nextLaserBottomPos;
     // Start is called before the first frame update
     void Start()
     {
-        origPos = new Vector2(transform.position.x, transform.position.y);
-        origScale = new Vector2(transform.localScale.x, transform.localScale.y);
+        origScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        origLaserBottomPos = laserBottom.transform.position;
+        nextLaserBottomPos = laserBottom.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        if (nextLaserBottomPos != origLaserBottomPos) 
+        {
+            origPos = new Vector3(transform.position.x, transform.position.y, 0f);
+            origLaserBottomPos = nextLaserBottomPos;
+        }
+        nextLaserBottomPos = laserBottom.transform.position;
     }
 
     public void OnTriggerStay2D(Collider2D collider) {
@@ -31,13 +41,11 @@ public class LaserBlock : MonoBehaviour
             */
             if (!isHorizontal)
             {
-                float bottomEdge = origPos.y - ((origScale.y * GetComponent<BoxCollider2D>().size.y) / 2.0f);
-                Debug.Log("Bottom Edge: " + bottomEdge);
-                float topEdge = collider.transform.position.y - collider.GetComponent<BoxCollider2D>().size.y / 2 + 0.7f;
-                Debug.Log("Top Edge: " + topEdge);
-                transform.position = new Vector3(transform.position.x, (bottomEdge + topEdge) / 2.0f - 0.1f, transform.position.z);
-                float yScale = Math.Abs(topEdge - bottomEdge) / (GetComponent<BoxCollider2D>().size.y * transform.localScale.y);
-                Debug.Log("Scale: " + yScale);
+                Debug.Log(transform.position.y);
+                float bottomEdge = transform.position.y - ((laserBottom.GetComponent<BoxCollider2D>().size.y + (transform.localScale.y * GetComponent<BoxCollider2D>().size.y)) / 2.0f);
+                float topEdge = collider.transform.position.y - (collider.GetComponent<BoxCollider2D>().size.y * collider.transform.localScale.y) / 2 + 0.7f;
+                transform.position = new Vector3(transform.position.x, (bottomEdge + topEdge) / 2.0f, transform.position.z);
+                float yScale = Math.Abs(topEdge - bottomEdge) / Math.Abs(GetComponent<BoxCollider2D>().size.y * transform.localScale.y + laserBottom.GetComponent<BoxCollider2D>().size.y);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * yScale, transform.localScale.z);
             }
             else
@@ -53,7 +61,7 @@ public class LaserBlock : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collider) {
         if (collider.gameObject.CompareTag("Box")) {
-            transform.position = origPos;
+            transform.position = new Vector3(origPos.x, origPos.y, origPos.z);
             transform.localScale = origScale;
         }
     }
