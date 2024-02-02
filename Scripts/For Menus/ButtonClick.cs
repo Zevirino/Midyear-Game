@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ButtonClick : MonoBehaviour
 {
-    public static int playSceneID = 2;
     public GameObject button;
     public GameObject playText;
     private bool instance;
@@ -20,11 +19,11 @@ public class ButtonClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             if (instance)
             {
-                if (playSceneID != 2)
+                if (PlayerPrefs.GetInt("SceneID", 2) > 2)
                 {
                     playText.GetComponent<TMPro.TMP_Text>().text = "Continue";
                 }
@@ -44,6 +43,6 @@ public class ButtonClick : MonoBehaviour
 
     public void PlayClicked()
     {
-        SceneManager.LoadScene(playSceneID);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("SceneID", 2));
     }
 }

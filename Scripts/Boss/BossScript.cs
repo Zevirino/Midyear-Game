@@ -12,14 +12,19 @@ public class BossScript : MonoBehaviour
     public GameObject fire;
     public GameObject player;
     public GameObject camera;
+    public GameObject startCamera;
     public GameObject laser;
     public GameObject laserSpawner;
     public GameObject door;
 
     public GameObject slider;
+    public GameObject sliderFill;
 
     public static bool first;
-    private bool curReset;
+    public static bool gameOver = false;
+
+    public float timeBetweenAttacks;
+    private bool halfWayFirst;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -52,48 +57,35 @@ public class BossScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startCamera.SetActive(true);
+        CameraFollow.bossFight = false;
+        BossRoomCamera.on = false;
         health = 100f;
         invulnerable = false;
-        curReset = false;
+        halfWayFirst = true;
         BossScript.first = false;
+        BossScript.gameOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BossScript.restartFight)
-        {
-            if (!curReset)
-            {
-                player.transform.position = new Vector3(playerOgXPos, -2f, 0f);
-                health = 100f;
-                slider.GetComponent<Slider>().value = health;
-                StopAllCoroutines();
-                StartCoroutine(fireBallAttack());
-                BossScript.restartFight = false;
-                //StartCoroutine(levelReset());
-            }
-        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (BossRoomCamera.on)
-            {
-                BossScript.restartFight = true;
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if (health <= 0)
         {
+            sliderFill.SetActive(false);
             door.SetActive(true);
-            dissapearingWall.SetActive(true);
+            dissapearingWall.SetActive(false);
+            BossScript.gameOver = true;
             Destroy(gameObject);
         }
         if (BossScript.first)
         {
-            StartCoroutine(poisonAttack());
+            StartCoroutine(fireBallAttack());
             BossScript.first = false;
         }
     }
@@ -149,11 +141,11 @@ public class BossScript : MonoBehaviour
             yield return new WaitForSeconds(fireBallTimeDelay);
             corY += 10f;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeBetweenAttacks);
         StartCoroutine(attackPattern());
     }
 
-    public IEnumerator fireAttack()
+        public IEnumerator fireAttack()
     {
         GameObject go = Instantiate(fire, ogFirePos, Quaternion.identity);
         go.transform.Rotate(new Vector3(0f,0f,-20f));
@@ -166,7 +158,7 @@ public class BossScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         Destroy(go);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeBetweenAttacks);
         StartCoroutine(attackPattern());
     }
 
@@ -174,13 +166,13 @@ public class BossScript : MonoBehaviour
     {
         GameObject go = Instantiate(laser, laserPos, Quaternion.identity) as GameObject;
         go.transform.localScale = new Vector3(0,0.5f,1);
-        while(go.transform.localScale.x < 7f)
+        while(go.transform.localScale.x < 6f)
         {
             yield return new WaitForSeconds(laserGrowDelay);
-            go.transform.localScale = new Vector3(go.transform.localScale.x + 1, go.transform.localScale.y, go.transform.localScale.z);
-            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed, go.transform.position.y + laserGrowSpeed/2);
+            go.transform.localScale = new Vector3(go.transform.localScale.x - laserGrowSpeed, 0.5f, 1);
+            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed - 0.2f, go.transform.position.y - 1.2f);
         }
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(timeBetweenAttacks*2);
         StartCoroutine(attackPattern());
     }
 
@@ -191,6 +183,8 @@ public class BossScript : MonoBehaviour
         GameManager.gameFreeze = true;
         while(player.transform.position.x > playerOgXPos)
         {
+            player.GetComponent<CapsuleCollider2D>().enabled = false;
+            player.GetComponent<Rigidbody2D>().gravityScale = 0;
             yield return new WaitForSeconds(playerThrownBackTime);
             if (player.transform.position.x < playerOgXPos + 2f)
             {
@@ -201,6 +195,8 @@ public class BossScript : MonoBehaviour
                 player.transform.Translate(new Vector3((playerOgXPos - player.transform.position.x) * playerThrownBackSpeed * Time.deltaTime, 0.01f, 0f));
             }
         }
+        player.GetComponent<CapsuleCollider2D>().enabled = true;
+        player.GetComponent<Rigidbody2D>().gravityScale = 2;
         GameManager.gameFreeze = false;
         dissapearingWall.SetActive(true);
         StartCoroutine(attackPattern());
@@ -221,34 +217,39 @@ public class BossScript : MonoBehaviour
         StartCoroutine(laserSpawner.GetComponent<SpawnLaser>().spawnLaser(go));
     }
 
-    public IEnumerator levelReset()
-    {
-        curReset = true;
-        yield return new WaitForSeconds(0.01f);
-        BossScript.restartFight = false;
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Laser"))
         {
+            Debug.Log("Colliding with laser");
             if (!invulnerable)
             {
-                health -= laserDamageVar;
-                slider.GetComponent<Slider>().value -= laserDamageVar;
-                StartCoroutine(invinciblePeriod());
+                takeDmg(laserDamageVar);
                 StartCoroutine(laserFall(collision.gameObject));
             }
         }
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            health -= playerDamageVar;
-            slider.GetComponent<Slider>().value -= playerDamageVar;
-            StartCoroutine(invinciblePeriod());
+            takeDmg(playerDamageVar);
         }
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
         }
+    }
+
+    private void takeDmg(float dmg)
+    {
+        health -= dmg;
+        if (health > 0)
+        {
+            slider.GetComponent<Slider>().value = health;
+        }
+        if (health <= 50 && halfWayFirst)
+        {
+            halfWayFirst = false;
+            timeBetweenAttacks /= 2;
+        }
+        StartCoroutine(invinciblePeriod());
     }
 }
