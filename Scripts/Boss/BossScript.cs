@@ -18,8 +18,13 @@ public class BossScript : MonoBehaviour
     public GameObject door;
 
     public GameObject slider;
+    public GameObject sliderFill;
 
     public static bool first;
+    public static bool gameOver = false;
+
+    public float timeBetweenAttacks;
+    private bool halfWayFirst;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -57,7 +62,9 @@ public class BossScript : MonoBehaviour
         BossRoomCamera.on = false;
         health = 100f;
         invulnerable = false;
+        halfWayFirst = true;
         BossScript.first = false;
+        BossScript.gameOver = false;
     }
 
     // Update is called once per frame
@@ -68,16 +75,17 @@ public class BossScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
         if (health <= 0)
         {
+            sliderFill.SetActive(false);
             door.SetActive(true);
-            dissapearingWall.SetActive(true);
+            dissapearingWall.SetActive(false);
+            BossScript.gameOver = true;
             Destroy(gameObject);
         }
         if (BossScript.first)
         {
-            StartCoroutine(poisonAttack());
+            StartCoroutine(fireBallAttack());
             BossScript.first = false;
         }
     }
@@ -133,7 +141,7 @@ public class BossScript : MonoBehaviour
             yield return new WaitForSeconds(fireBallTimeDelay);
             corY += 10f;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeBetweenAttacks);
         StartCoroutine(attackPattern());
     }
 
@@ -150,7 +158,7 @@ public class BossScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         Destroy(go);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeBetweenAttacks);
         StartCoroutine(attackPattern());
     }
 
@@ -162,9 +170,9 @@ public class BossScript : MonoBehaviour
         {
             yield return new WaitForSeconds(laserGrowDelay);
             go.transform.localScale = new Vector3(go.transform.localScale.x - laserGrowSpeed, 0.5f, 1);
-            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed - 0.02f, go.transform.position.y - 1.2f);
+            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed - 0.2f, go.transform.position.y - 1.2f);
         }
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(timeBetweenAttacks*2);
         StartCoroutine(attackPattern());
     }
 
@@ -175,6 +183,8 @@ public class BossScript : MonoBehaviour
         GameManager.gameFreeze = true;
         while(player.transform.position.x > playerOgXPos)
         {
+            player.GetComponent<CapsuleCollider2D>().enabled = false;
+            player.GetComponent<Rigidbody2D>().gravityScale = 0;
             yield return new WaitForSeconds(playerThrownBackTime);
             if (player.transform.position.x < playerOgXPos + 2f)
             {
@@ -185,6 +195,8 @@ public class BossScript : MonoBehaviour
                 player.transform.Translate(new Vector3((playerOgXPos - player.transform.position.x) * playerThrownBackSpeed * Time.deltaTime, 0.01f, 0f));
             }
         }
+        player.GetComponent<CapsuleCollider2D>().enabled = true;
+        player.GetComponent<Rigidbody2D>().gravityScale = 2;
         GameManager.gameFreeze = false;
         dissapearingWall.SetActive(true);
         StartCoroutine(attackPattern());
@@ -209,23 +221,35 @@ public class BossScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Laser"))
         {
+            Debug.Log("Colliding with laser");
             if (!invulnerable)
             {
-                health -= laserDamageVar;
-                slider.GetComponent<Slider>().value -= laserDamageVar;
-                StartCoroutine(invinciblePeriod());
+                takeDmg(laserDamageVar);
                 StartCoroutine(laserFall(collision.gameObject));
             }
         }
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            health -= playerDamageVar;
-            slider.GetComponent<Slider>().value -= playerDamageVar;
-            StartCoroutine(invinciblePeriod());
+            takeDmg(playerDamageVar);
         }
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
         }
+    }
+
+    private void takeDmg(float dmg)
+    {
+        health -= dmg;
+        if (health > 0)
+        {
+            slider.GetComponent<Slider>().value = health;
+        }
+        if (health <= 50 && halfWayFirst)
+        {
+            halfWayFirst = false;
+            timeBetweenAttacks /= 2;
+        }
+        StartCoroutine(invinciblePeriod());
     }
 }

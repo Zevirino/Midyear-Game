@@ -328,7 +328,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1537,6 +1537,8 @@ MonoBehaviour:
   laserSpawner: {fileID: 64093425}
   door: {fileID: 210929354}
   slider: {fileID: 138754616}
+  sliderFill: {fileID: 991198059}
+  timeBetweenAttacks: 5
   freezeDelay: 10
   playerOgXPos: 20
   playerThrownBackTime: 0.01
@@ -1555,7 +1557,7 @@ MonoBehaviour:
   invulnerable: 1
   invulnerableTime: 2
   invulnerableBox: {fileID: 348711914}
-  laserDamageVar: 10
+  laserDamageVar: 100
   playerDamageVar: 10
 --- !u!61 &519866759
 BoxCollider2D:

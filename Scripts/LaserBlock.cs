@@ -38,6 +38,11 @@ public class LaserBlock : MonoBehaviour
             }
             nextLaserBottomPos = laserBottom.transform.position;
         }
+        if (BossScript.gameOver)
+        {
+            Destroy(laserBottom);
+            Destroy(gameObject);
+        }
     }
 
     public void OnTriggerStay2D(Collider2D collider) {
