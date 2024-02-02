@@ -20,9 +20,9 @@ public class BackToMenu : MonoBehaviour
     public void backToMenu()
     {
         int sceneId = SceneManager.GetActiveScene().buildIndex;
-        if (sceneId > ButtonClick.playSceneID)
+        if (sceneId > PlayerPrefs.GetInt("SceneID", 2))
         {
-            ButtonClick.playSceneID = sceneId;
+            PlayerPrefs.SetInt("SceneID", sceneId);
         }
         SceneManager.LoadScene(1);
     }
