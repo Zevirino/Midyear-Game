@@ -20,11 +20,11 @@ public class ButtonClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             if (instance)
             {
-                if (playSceneID != 2)
+                if (playSceneID > 2)
                 {
                     playText.GetComponent<TMPro.TMP_Text>().text = "Continue";
                 }
