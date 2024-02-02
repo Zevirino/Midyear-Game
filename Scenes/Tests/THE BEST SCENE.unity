@@ -417,7 +417,7 @@ MonoBehaviour:
   range: 140
   attackSpeed: 0.001
   weaponCooldown: 1
-  smite_particles: {fileID: 0}
+  smite_particles: {fileID: 4313504826639704766, guid: a3477d0cb14684eb9b0c3a566c3d722b, type: 3}
 --- !u!114 &61286553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3241,7 +3241,19 @@ PrefabInstance:
       objectReference: {fileID: 1573487993}
     - target: {fileID: 7824301935621419199, guid: e3126f8baefaa35468c5291ef4aca247, type: 3}
       propertyPath: m_Name
+<<<<<<< Updated upstream
       value: Gross
+=======
+      value: Gross (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955524383985341253, guid: 2b8bcf9f6318240f687c174ed787b115, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955524383985341253, guid: 2b8bcf9f6318240f687c174ed787b115, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
