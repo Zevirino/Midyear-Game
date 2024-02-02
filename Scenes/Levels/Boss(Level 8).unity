@@ -1540,7 +1540,7 @@ MonoBehaviour:
   freezeDelay: 10
   playerOgXPos: 20
   playerThrownBackTime: 0.01
-  playerThrownBackSpeed: 1
+  playerThrownBackSpeed: 2
   fireBallTimeDelay: 0.05
   fireballXOffset: -5
   fireballYOffset: -1
@@ -1549,8 +1549,8 @@ MonoBehaviour:
   maxFireSize: 5
   fireGrowSpeed: 0.2
   fireGrowDelay: 0.1
-  laserPos: {x: 37.1, y: 3.7}
-  laserGrowSpeed: 0.1
+  laserPos: {x: 44, y: 11}
+  laserGrowSpeed: -1
   laserGrowDelay: 0.05
   invulnerable: 1
   invulnerableTime: 2

@@ -158,11 +158,11 @@ public class BossScript : MonoBehaviour
     {
         GameObject go = Instantiate(laser, laserPos, Quaternion.identity) as GameObject;
         go.transform.localScale = new Vector3(0,0.5f,1);
-        while(go.transform.localScale.x < 7f)
+        while(go.transform.localScale.x < 6f)
         {
             yield return new WaitForSeconds(laserGrowDelay);
-            go.transform.localScale = new Vector3(go.transform.localScale.x + 1, go.transform.localScale.y, go.transform.localScale.z);
-            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed, go.transform.position.y + laserGrowSpeed/2);
+            go.transform.localScale = new Vector3(go.transform.localScale.x - laserGrowSpeed, 0.5f, 1);
+            go.transform.position = new Vector2(go.transform.position.x + laserGrowSpeed - 0.02f, go.transform.position.y - 1.2f);
         }
         yield return new WaitForSeconds(10f);
         StartCoroutine(attackPattern());
