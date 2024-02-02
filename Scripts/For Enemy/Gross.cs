@@ -39,6 +39,7 @@ public class Gross : MonoBehaviour
 
     public void takeDamage(float dmg)
     {
+        print("entity took damage");
         if (!invulnerable)
         {
             health -= dmg;

@@ -15,7 +15,7 @@ public class LaserBlock : MonoBehaviour
     void Start()
     {
         origScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        if (isHorizontal) 
+        if (isHorizontal || !(GetComponent<LaserMove>().isMovable)) 
         {
             origPos = transform.position;
         }
@@ -29,7 +29,7 @@ public class LaserBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isHorizontal)
+        // if (!isHorizontal)
         {
             if (nextLaserBottomPos != origLaserBottomPos)
             {
@@ -37,6 +37,11 @@ public class LaserBlock : MonoBehaviour
                 origLaserBottomPos = nextLaserBottomPos;
             }
             nextLaserBottomPos = laserBottom.transform.position;
+        }
+        if (BossScript.gameOver)
+        {
+            Destroy(laserBottom);
+            Destroy(gameObject);
         }
     }
 
@@ -50,14 +55,10 @@ public class LaserBlock : MonoBehaviour
             */
             if (!isHorizontal)
             {
-                Debug.Log("yPos: " + transform.position.y);
                 float bottomEdge = transform.position.y - ((laserBottom.GetComponent<BoxCollider2D>().size.y + (transform.localScale.y * GetComponent<BoxCollider2D>().size.y)) / 2.0f);
-                Debug.Log("Bottom Edge: " + bottomEdge);
                 float topEdge = collider.transform.position.y - (collider.GetComponent<BoxCollider2D>().size.y * collider.transform.localScale.y) / 2 + 0.7f;
-                Debug.Log("Top Edge: " + topEdge);
                 transform.position = new Vector3(transform.position.x, (bottomEdge + topEdge) / 2.0f, transform.position.z);
                 float yScale = Math.Abs(topEdge - bottomEdge) / Math.Abs(GetComponent<BoxCollider2D>().size.y * transform.localScale.y + laserBottom.GetComponent<BoxCollider2D>().size.y);
-                Debug.Log("yScale: " + yScale);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * yScale, transform.localScale.z);
             }
             else
