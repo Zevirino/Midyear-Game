@@ -199,4 +199,9 @@ public class PlayerScript : MonoBehaviour
     {
         return horizontalInput;
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

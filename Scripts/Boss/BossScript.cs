@@ -77,7 +77,7 @@ public class BossScript : MonoBehaviour
         }
         if (BossScript.first)
         {
-            StartCoroutine(fireBallAttack());
+            StartCoroutine(poisonAttack());
             BossScript.first = false;
         }
     }
