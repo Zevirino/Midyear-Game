@@ -92,6 +92,14 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
             // transform.position = new Vector3(newX, newY, newZ);
     }
 
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && is_attacking)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
 
 
 

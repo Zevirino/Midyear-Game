@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poison: {fileID: 4225876502729958121, guid: 9effdf637011cd745bf18fa581ba942f, type: 3}
-  poisonPos: {x: 30.6, y: -1}
+  poisonPos: {x: 33.7, y: -1}

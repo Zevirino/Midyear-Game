@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class BossScript : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class BossScript : MonoBehaviour
     public GameObject laser;
     public GameObject laserSpawner;
     public GameObject door;
+
+    public GameObject slider;
 
     public static bool first;
 
@@ -38,14 +42,14 @@ public class BossScript : MonoBehaviour
     public float invulnerableTime = 2f;
     public GameObject invulnerableBox;
 
-    private float health = 100f;
+    private float health;
     public float laserDamageVar = 5f;
     public float playerDamageVar = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerOgXPos = player.GetComponent<PlayerScript>().transform.position.x;
+        health = 100f;
         invulnerable = false;
         BossScript.first = false;
     }
@@ -60,7 +64,7 @@ public class BossScript : MonoBehaviour
         }
         if (BossScript.first)
         {
-            StartCoroutine(fireAttack());
+            StartCoroutine(poisonAttack());
             BossScript.first = false;
         }
     }
@@ -69,6 +73,8 @@ public class BossScript : MonoBehaviour
     {
         if (camera.GetComponent<BossRoomCamera>().enabled && !invulnerable)
         {
+            health -= laserDamageVar;
+            slider.GetComponent<Slider>().value = health;
             int RandomNum = Random.Range(0, 4);
             switch (RandomNum)
             {
@@ -82,7 +88,7 @@ public class BossScript : MonoBehaviour
                     break;
                 case 2:
                     Debug.Log("poisonAttack");
-                    StartCoroutine(fireAttack());
+                    StartCoroutine(poisonAttack());
                     break;
                 case 3:
                     Debug.Log("freezePeriod");
@@ -122,17 +128,17 @@ public class BossScript : MonoBehaviour
 
     public IEnumerator fireAttack()
     {
-        fire.transform.localScale = ogFireSize;
-        fire.transform.position = ogFirePos;
-        fire.SetActive(true);
-        while (fire.transform.localScale.x < maxFireSize)
+        GameObject go = Instantiate(fire, ogFirePos, Quaternion.identity);
+        go.transform.Rotate(new Vector3(0f,0f,-20f));
+        go.transform.localScale = ogFireSize;
+        while (go.transform.localScale.x < maxFireSize)
         {
             yield return new WaitForSeconds(fireGrowDelay);
-            fire.transform.localScale = new Vector3(fire.transform.localScale.x + fireGrowSpeed, fire.transform.localScale.y + fireGrowSpeed, fire.transform.localScale.z + fireGrowSpeed);
-            fire.transform.position = new Vector2(fire.transform.position.x - 1.5f*fireGrowSpeed, fire.transform.position.y - fireGrowSpeed);
+            go.transform.localScale = new Vector3(go.transform.localScale.x + fireGrowSpeed, go.transform.localScale.y + fireGrowSpeed, go.transform.localScale.z + fireGrowSpeed);
+            go.transform.position = new Vector2(go.transform.position.x - 1.5f*fireGrowSpeed, go.transform.position.y - fireGrowSpeed);
         }
         yield return new WaitForSeconds(0.1f);
-        fire.SetActive(false);
+        Destroy(go);
         yield return new WaitForSeconds(5f);
         StartCoroutine(attackPattern());
     }
@@ -155,16 +161,21 @@ public class BossScript : MonoBehaviour
     {
         dissapearingWall.SetActive(false);
         yield return new WaitForSeconds(freezeDelay);
-        /*
         GameManager.gameFreeze = true;
         while(player.transform.position.x > playerOgXPos)
         {
             yield return new WaitForSeconds(playerThrownBackTime);
-            player.transform.Translate(new Vector3((playerOgXPos - player.transform.position.x) * playerThrownBackSpeed * Time.deltaTime, 0f, 0f));
+            if (player.transform.position.x < playerOgXPos + 0.5f)
+            {
+                player.transform.Translate(new Vector3(-0.4f, 0f, 0f));
+            }
+            else
+            {
+                player.transform.Translate(new Vector3((playerOgXPos - player.transform.position.x) * playerThrownBackSpeed * Time.deltaTime, 0.01f, 0f));
+            }
         }
         GameManager.gameFreeze = false;
         dissapearingWall.SetActive(true);
-        */
         StartCoroutine(attackPattern());
     }
 
@@ -190,6 +201,7 @@ public class BossScript : MonoBehaviour
             if (!invulnerable)
             {
                 health -= laserDamageVar;
+                slider.GetComponent<Slider>().value -= laserDamageVar;
                 StartCoroutine(invinciblePeriod());
                 StartCoroutine(laserFall(collision.gameObject));
             }
@@ -197,6 +209,7 @@ public class BossScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Weapon"))
         {
             health -= playerDamageVar;
+            slider.GetComponent<Slider>().value -= playerDamageVar;
             StartCoroutine(invinciblePeriod());
         }
         if (collision.gameObject.CompareTag("Player"))
