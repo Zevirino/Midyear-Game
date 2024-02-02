@@ -29,5 +29,11 @@ public class BossRoomCamera : MonoBehaviour
             gameObject.GetComponent<Camera>().orthographicSize = size;
             CameraFollow.bossFight = true;
         }
+        else
+        {
+            bossCamera.enabled = false;
+            camera.SetActive(true);
+            CameraFollow.bossFight = false;
+        }
     }
 }

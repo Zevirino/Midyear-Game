@@ -162,9 +162,13 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser")) 
+        if (col.gameObject.CompareTag("Laser")) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser"))
+        {
+            BossScript.restartFight = true;
         }
         if (col.gameObject.CompareTag("Branch") && !using2d && !BreakBranch.isBreaking)
         {
@@ -183,6 +187,14 @@ public class PlayerScript : MonoBehaviour
         {
             BossRoomCamera.on = true;
             BossScript.first = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("BossRoomEntrance"))
+        {
+            collision.isTrigger = false;
         }
     }
 

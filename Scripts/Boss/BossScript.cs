@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossScript : MonoBehaviour
@@ -18,6 +19,7 @@ public class BossScript : MonoBehaviour
     public GameObject slider;
 
     public static bool first;
+    private bool curReset;
 
     public float freezeDelay = 5.0f;
     public float playerOgXPos;
@@ -45,21 +47,48 @@ public class BossScript : MonoBehaviour
     private float health;
     public float laserDamageVar = 5f;
     public float playerDamageVar = 10f;
+    public static bool restartFight = false;
 
     // Start is called before the first frame update
     void Start()
     {
         health = 100f;
         invulnerable = false;
+        curReset = false;
         BossScript.first = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (BossScript.restartFight)
+        {
+            if (!curReset)
+            {
+                player.transform.position = new Vector3(playerOgXPos, -2f, 0f);
+                health = 100f;
+                slider.GetComponent<Slider>().value = health;
+                StopAllCoroutines();
+                StartCoroutine(fireBallAttack());
+                BossScript.restartFight = false;
+                //StartCoroutine(levelReset());
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (BossRoomCamera.on)
+            {
+                BossScript.restartFight = true;
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
         if (health <= 0)
         {
             door.SetActive(true);
+            dissapearingWall.SetActive(true);
             Destroy(gameObject);
         }
         if (BossScript.first)
@@ -73,8 +102,6 @@ public class BossScript : MonoBehaviour
     {
         if (camera.GetComponent<BossRoomCamera>().enabled && !invulnerable)
         {
-            health -= laserDamageVar;
-            slider.GetComponent<Slider>().value = health;
             int RandomNum = Random.Range(0, 4);
             switch (RandomNum)
             {
@@ -165,7 +192,7 @@ public class BossScript : MonoBehaviour
         while(player.transform.position.x > playerOgXPos)
         {
             yield return new WaitForSeconds(playerThrownBackTime);
-            if (player.transform.position.x < playerOgXPos + 0.5f)
+            if (player.transform.position.x < playerOgXPos + 2f)
             {
                 player.transform.Translate(new Vector3(-0.4f, 0f, 0f));
             }
@@ -192,6 +219,13 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         StartCoroutine(laserSpawner.GetComponent<SpawnLaser>().spawnLaser(go));
+    }
+
+    public IEnumerator levelReset()
+    {
+        curReset = true;
+        yield return new WaitForSeconds(0.01f);
+        BossScript.restartFight = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
