@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorTimeDelay: 0.05
   frameDistance: 0.025
-  fadeToBlack: {fileID: 0}
+  fadeToBlack: {fileID: 764082652}
   fadeTimeDelay: 0.1
   transparency: 0
 --- !u!212 &1121789137

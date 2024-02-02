@@ -899,7 +899,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorTimeDelay: 0.05
   frameDistance: 0.025
-  fadeToBlack: {fileID: 0}
+  fadeToBlack: {fileID: 233633779}
   fadeTimeDelay: 0.1
   transparency: 0
 --- !u!1 &791505137

@@ -2379,7 +2379,6 @@ Transform:
   - {fileID: 258846886}
   - {fileID: 1291236630}
   - {fileID: 1017143217}
-  - {fileID: 1611183824}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2528,7 +2527,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1291236628
 GameObject:
@@ -3903,14 +3902,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611183820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.7999992, z: -10}
+  m_LocalPosition: {x: 0, y: 38.66678, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1162596324}
   - {fileID: 1874458938}
-  m_Father: {fileID: 1194592897}
-  m_RootOrder: 5
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618095697
 GameObject:
@@ -4831,7 +4830,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -4890,7 +4889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorTimeDelay: 0.05
   frameDistance: 0.025
-  fadeToBlack: {fileID: 0}
+  fadeToBlack: {fileID: 1874458937}
   fadeTimeDelay: 0.1
   transparency: 0
 --- !u!212 &1878495615
