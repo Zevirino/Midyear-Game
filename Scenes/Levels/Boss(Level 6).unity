@@ -328,7 +328,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1557,7 +1557,7 @@ MonoBehaviour:
   invulnerable: 1
   invulnerableTime: 2
   invulnerableBox: {fileID: 348711914}
-  laserDamageVar: 100
+  laserDamageVar: 20
   playerDamageVar: 10
 --- !u!61 &519866759
 BoxCollider2D:
