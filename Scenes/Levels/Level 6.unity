@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534395602}
     m_Modifications:
+    - target: {fileID: -8422122339219688131, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser
@@ -201,6 +205,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534395602}
     m_Modifications:
+    - target: {fileID: -8422122339219688131, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser (3)
@@ -531,6 +539,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534395602}
     m_Modifications:
+    - target: {fileID: -8422122339219688131, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser (2)
@@ -1228,6 +1240,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534395602}
     m_Modifications:
+    - target: {fileID: -8422122339219688131, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser (1)
@@ -2442,6 +2458,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534395602}
     m_Modifications:
+    - target: {fileID: -8422122339219688131, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185445902279509345, guid: 57bbf031a71f24042b2e17f8ecc6b9b1, type: 3}
       propertyPath: m_Name
       value: Laser (4)
