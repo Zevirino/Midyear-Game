@@ -207,6 +207,29 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1393602461}
   m_SourcePrefab: {fileID: 100100000, guid: a46a18b781608d341abdad538895d99e, type: 3}
+--- !u!1 &166248921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4934467944674483508, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
+  m_PrefabInstance: {fileID: 4471947601729046827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1818360608 &166248928
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166248921}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 4.02, y: 2.0753, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources: []
 --- !u!1001 &179888019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -794,6 +817,10 @@ PrefabInstance:
       propertyPath: isMovable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4934467944674483508, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4934467944674483513, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
       propertyPath: m_LocalScale.y
       value: 3.0138001
@@ -810,10 +837,17 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.14240617
       objectReference: {fileID: 0}
+    - target: {fileID: 6852175074525605224, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4934467944674483508, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 166248928}
   m_SourcePrefab: {fileID: 100100000, guid: 3de893fc4e5cec446aaf912c97345b53, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
