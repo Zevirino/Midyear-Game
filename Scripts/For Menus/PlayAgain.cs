@@ -18,7 +18,7 @@ public class PlayAgain : MonoBehaviour
     }
 
     public void playAgain(){
-        ButtonClick.playSceneID = 2;
+        PlayerPrefs.SetInt("SceneID", 2);
         SceneManager.LoadScene(1);
     }
 }
