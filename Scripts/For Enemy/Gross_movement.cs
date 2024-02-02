@@ -18,13 +18,14 @@ public class Gross_movement : MonoBehaviour
     public bool isCountingDown = false;
     public bool facingLeft = true;
     public bool is_attacking = false;
+    public double follow_activation_distance = 6;
 
-public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
+    public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3 (3, 0, 0);
+        // transform.position = new Vector3 (3, 0, 0);
         anim = GetComponent<Animator>();
     }
 
@@ -54,6 +55,7 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
     // Update is called once per frame
     void Update()
     {
+        
         handle_face_L_R_logic();
         distance = Vector2.Distance(transform.position, target.transform.position);
         Vector2 direction = target.transform.position - transform.position; 
@@ -64,11 +66,12 @@ public Vector3 initialPosition = new Vector3(100f, 0f, 0f);
         }
         else{
             is_attacking = false;
-            if (target!=null){
+            if (target!=null && distance <= follow_activation_distance){
                 if (PlayerScript.using2d)
                 {
-                transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
-                    transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+                    // transform.Translate(new Vector3((target.transform.position.x-transform.position.x)*speed * Time.deltaTime, 0f, 0f));
+                    // transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.transform.position.x, target.transform.position.y), speed * Time.deltaTime);
                 }
                 else 
                 {

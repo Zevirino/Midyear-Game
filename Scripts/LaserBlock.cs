@@ -22,7 +22,7 @@ public class LaserBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+        // transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
         if (nextLaserBottomPos != origLaserBottomPos) 
         {
             origPos = new Vector3(transform.position.x, transform.position.y, 0f);
