@@ -19,7 +19,7 @@ public class SpawnLaser : MonoBehaviour
 
     public IEnumerator spawnLaser(GameObject prevLaser)
     {
-        Destroy(prevLaser);
+        Destroy(prevLaser.transform.parent.gameObject);
         yield return new WaitForSeconds(0.5f);
         GameObject go = Instantiate(laser, transform.position, Quaternion.identity) as GameObject;
     }

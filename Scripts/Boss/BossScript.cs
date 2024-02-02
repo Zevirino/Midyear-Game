@@ -63,12 +63,12 @@ public class BossScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        
+
         if (health <= 0)
         {
             door.SetActive(true);
@@ -137,7 +137,7 @@ public class BossScript : MonoBehaviour
         StartCoroutine(attackPattern());
     }
 
-    public IEnumerator fireAttack()
+        public IEnumerator fireAttack()
     {
         GameObject go = Instantiate(fire, ogFirePos, Quaternion.identity);
         go.transform.Rotate(new Vector3(0f,0f,-20f));

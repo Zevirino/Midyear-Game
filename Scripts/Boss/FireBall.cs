@@ -22,8 +22,8 @@ public class FireBall : MonoBehaviour
     void Update()
     {
         transform.Rotate(new Vector3(0f, 0f, rotationVar));
-        transform.Translate(new Vector3(-0.05f, (aimPointY - transform.position.y)*Time.deltaTime/10, 0f),Space.World);
-        if (transform.position.y < minY || transform.position.x<minX)
+        transform.Translate(new Vector3(-0.01f, (aimPointY - transform.position.y) * Time.deltaTime / 10, 0f), Space.World);
+        if (transform.position.y < minY || transform.position.x < minX)
         {
             Destroy(gameObject);
         }

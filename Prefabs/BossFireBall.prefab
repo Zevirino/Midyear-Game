@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09b997cad06241468061f6b4f0f5bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationVar: 1
-  aimPointY: 0
+  rotationVar: 0.5
   minY: -30
+  minX: 0
 --- !u!50 &1498835411791549906
 Rigidbody2D:
   serializedVersion: 4

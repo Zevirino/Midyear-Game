@@ -162,13 +162,10 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Laser")) 
+        if (col.gameObject.CompareTag("Laser") || col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser")) 
         {
+            Debug.Log("Died to attack or laser");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        if (col.gameObject.CompareTag("FireBall") || col.gameObject.CompareTag("BossFire") || col.gameObject.CompareTag("BossLaser"))
-        {
-            BossScript.restartFight = true;
         }
         if (col.gameObject.CompareTag("Branch") && !using2d && !BreakBranch.isBreaking)
         {
