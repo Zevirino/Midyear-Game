@@ -9,7 +9,6 @@ public class SpawnLaser : MonoBehaviour
     void Start()
     {
         GameObject go = Instantiate(laser, transform.position, Quaternion.identity) as GameObject;
-        go.GetComponent<Rigidbody2D>().gravityScale *= 2;
     }
 
     // Update is called once per frame
@@ -23,6 +22,5 @@ public class SpawnLaser : MonoBehaviour
         Destroy(prevLaser);
         yield return new WaitForSeconds(0.5f);
         GameObject go = Instantiate(laser, transform.position, Quaternion.identity) as GameObject;
-        go.GetComponent<Rigidbody2D>().gravityScale *= 2;
     }
 }
